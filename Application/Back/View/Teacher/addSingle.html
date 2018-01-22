@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>添加单选题</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/SCEditor/minified/themes/default.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css">
+	</head>
+	<body>
+		<div class="container-fluid">
+			
+				<div class="page-header" style="margin-top: 0">
+					<h3 style="margin-top:10px;">题库管理<small>管理试题</small></h3>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4><i class="fa fa-gift"></i>&nbsp;新增试题</h4>
+					</div>
+					<div class="panel-body">
+						<ul class="nav navbar nav-tabs" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#">单选题</a>
+							</li>
+							<li role="presentation">
+								<a href="{:U('Teacher/addMulti')}">多选题</a>
+							</li>
+							<li role="presentation">
+								<a href="{:U('Teacher/addJudge')}">判断题</a>
+							</li>
+							<li role="presentation">
+								<a href="{:U('Teacher/addBlank')}">填空题</a>
+							</li>
+							<li role="presentation">
+								<a href="{:U('Teacher/addQu')}">问答题</a>
+							</li>
+							<li role="presentation">
+								<a href="{:U('Teacher/addFile')}">文件上传题</a>
+							</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content row">
+							<!--单选-->
+							<div role="tabpanel" class="tab-pane active" id="single" >
+							<form action="{:U('Teacher/addSingle')}"  method="post" class="form">
+							<h4 class="col-lg-12">题目</h4>
+							<div class="form-group col-lg-12">
+								<textarea id="question" name="sTitle"></textarea>
+							</div>
+							<h4 class="col-lg-12">答案选项</h4>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<h6>(A)</h6>
+								<textarea class="form-control" style="resize: none;" name="sA" required="required"></textarea>
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<h6>(B)</h6>
+								<textarea class="form-control" style="resize: none;" name="sB" required="required"></textarea>
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<h6>(C)</h6>
+								<textarea class="form-control" style="resize: none;" name="sC" required="required"></textarea>
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12">
+								<h6>(D)</h6>
+								<textarea class="form-control" style="resize: none;" name="sD" required="required"></textarea>
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+								<h6>正确选项</h6>
+								<select name="sTrue" class="form-control" id="option1">
+										<option value="A">A</option>
+										<option value="B">B</option>
+										<option value="C">C</option>
+										<option value="D">D</option>
+								</select>
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+								<h6>科目</h6>
+							    <select name="cName" class="form-control" id="option2">
+									    <volist name="list" id="vo">
+									    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+									    </volist>
+							    </select>
+							</div>
+							<div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-12">
+								<h6>分数</h6>
+								<input type="number" class="form-control" name="score"  required="required" value="2" />
+							</div>
+							<div class="form-group col-lg-12 col-md-12 col-sm-12">
+								<button type="submit" class="btn btn-success" data-dismiss="modal" style="width: 180px;">保存</button>
+							</div>
+						</form>
+							</div>
+					   </div>
+				</div>
+			</div>
+			
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/SCEditor/minified/jquery.sceditor.bbcode.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#question").sceditor({
+				plugins: 'bbcode',
+				height: '150px',
+				width: '100%',
+				resizeEnabled: false,
+				toolbar: 'bold,italic,underline,strike,color,left,center,right,justify,font,size,table,bulletlist,orederedlist,link,subscript,superscript,image,code,date,time,maximize',
+				style: "minified/jquery.sceditor.default.min.css"
+			});
+		</script>
+	</body>
+
+</html>

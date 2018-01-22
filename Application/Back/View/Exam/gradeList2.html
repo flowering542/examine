@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>试卷列表</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/main.css" />
+		<style type="text/css">
+			table thead tr th,
+			table tbody tr td {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<h3 class="page-header">成绩管理<small>成绩分析</small></h3>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h4><i class="fa fa-list"></i>&nbsp;试卷列表</h4>
+						</div>
+						<div class="panel-body">
+							<div class="exam-list">
+								<!--试题列表-->
+								<form action="{:U('Exam/delTest')}" method="post">
+									  <div class="row">
+									<div class="col-md-12 table-responsive">
+										<table class="table table-hover table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>序号</th>
+													<th>考试访问码</th>
+													<th>试卷名称</th>
+													<th>考试科目</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody id="tbList">
+												<foreach name="list" item="vo" key="i">
+												<tr>
+													<td>{$i+1}</td>
+													<td>{$vo['data'][0]['pcode']}</td>
+													<td>{$vo['data'][0]['pname']}</td>
+													<td>{$vo['data'][0]['cname']}</td>
+													<td><a href="{:U('Exam/analysis',array('pId'=>$vo['data'][0]['pid']))}"><i class="fa fa-search">查看分析</a>
+													</td>
+												</tr>
+												</foreach>
+											</tbody>
+										</table>
+									</div>
+								</div>
+									<!--批量删除-->
+								<div class="modal fade" id="delete-more" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">删除确认</h4>
+											</div>
+											<div class="modal-body">
+												确认删除选中的试题吗？
+											</div>
+											<div class="modal-footer">
+											    <button type="submit" class="btn btn-primary">确认</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	 <script type="text/javascript">
+	    function del(){
+	        return confirm("你确定删除吗？");
+	    }
+	     function back(){
+	         return confirm("确定退出吗？");
+	    }
+    </script>
+</html>

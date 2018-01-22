@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>个人资料</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/font-awesome-4.7.0/css/font-awesome.css" />
+		<style type="text/css">
+			#inputName,
+			#inputPhone,
+			#inputEmail {
+				width: 300px;
+			}
+			
+			#selectSex {
+				width: 70px;
+			}
+			@media (max-width: 299px) {
+				#inputName,
+				#inputPhone,
+				#inputEmail {
+					width: 100%;
+				}
+			}
+			  .errStyle{
+                  color: red;white-space: nowrap;
+        	 }
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="page-header" style="margin: 0;">
+				<h3 style="margin-top:10px;">个人中心<small>修改资料</small></h3>
+			</div>
+			<div class="panel">
+				<div class="panel-body">
+					<form action="{:U(Teacher/modifyPersonal)}" method="post" class="form" onsubmit="return mit();">
+						<div class="form-group" id="inputName">
+							<label for="name">姓名：&nbsp;<span style="color:red;">*</span></label>
+							<input type="hidden" name="tId" value="{$list['tid']}">
+							<input type="text" class="form-control" name="tName" id="name" value="{$list['tname']}" required="required" />
+						</div>
+						<div class="form-group" id="selectSex">
+							<label for="">性别：</label>
+							<select name="sex" class="form-control" name="tSex">
+								<option value="男" {:selectSex1($list['tsex'])}>男</option>
+								<option value="女" {:selectSex2($list['tsex'])}>女</option>
+							</select>
+						</div>
+						<div class="form-group" id="inputPhone">
+							<label for="">电话号码：</label>
+							<input type="text" class="form-control" name="tPhone"  value="{$list['tphone']}" id="form-phone"/>
+							<span id="sPhone" class="errStyle"></span>
+						</div>
+						<div class="form-group" id="inputEmail">
+							<label for="">邮箱地址：</label>
+							<input type="text" class="form-control" name="tEmail" value="{$list['temail']}" id="form-email"/>
+							<span id="sEmail" class="errStyle"></span>
+						</div>
+						<button class="btn btn-success" type="submit">确认</button>
+						<a href="#" onclick="location.href='./personal'" class="btn btn-default">返回</a>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+      <script type="text/javascript">
+             var arr = [true,true];
+             var url = "{:U('Admin/addTeacher')}";
+             var tPhone1 = "{$list['tphone']}";
+            $(function(){
+            	  $('#form-email').blur(function(){
+                       if(checkEmail(this.value)){
+                       	  $('#sEmail').hide().text('');
+                       	   arr[0] = true;
+                       }
+                       else{
+                       	  $('#sEmail').show().text('请输入合法的邮箱！');
+                       	  arr[0] = false;
+                       }
+		 	 });
+		 	  $('#form-phone').blur(function(){
+                       if(checkPhone(this.value)){
+                       	  $('#sPhone').hide().text('');
+                       	  if(this.value === tPhone1){
+                                 arr[1] = true;
+                       	  }
+                       	  else{
+                       	  	   $.post(url,{tPhone:this.value},function(data){
+	                             if(data == 1){
+	                             	 $('#sPhone').show().text('该电话号码已存在！');
+	                             	 arr[1] = false;
+	                             }
+	                             else{
+	                             	 $('#sPhone').hide().text('');
+	                             	 arr[1] = true;
+	                             }
+		 	 	   	        });
+                       	  }
+                       }
+                       else{
+                       	  $('#sPhone').show().text('请输入合法的电话号码！');
+                       	  arr[1] = false;
+                       }
+		 	 });
+            })
+    	    function mit (){
+		  	  if(arr[0]&&arr[1]) {
+		  	  	return true;
+		  	  }
+		  	  return false;
+		  }
+		 //判断合法的邮箱
+		 function checkEmail(str){
+             var patt = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/;
+             if(patt.test(str)){
+             	return true;
+             }
+             return false;
+		 }
+		  function checkPhone(str){
+             var patt = /^1(\d){10}$/;
+             if(patt.test(str)){
+             	return true;
+             }
+             return false;
+		 }
+	   function back(){
+         return confirm("确定退出吗？");
+       }
+    </script>
+</html>

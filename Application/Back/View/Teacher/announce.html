@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="__PUBLIC__/teacher/images/logo.png">
+		<title>公告管理</title>
+		<link href="__PUBLIC__/teacher/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css">
+	</head>
+
+	<body>   
+		<div class="container-fluid">
+			<div class="row">
+			    <form action="{:U('Teacher/announce')}" method="post">
+			    	<div class="col-lg-12">
+					<div class="page-header" style="margin-top: 10px;">
+						<h3 style="margin-top: 10px;"><i class="fa fa-newspaper-o"></i>&nbsp;公告管理<small>发布公告</small></h3>
+					</div>
+					<div class="input-group">
+  						<span class="input-group-addon" id="subject">公告标题:</span>
+ 						<input type="text" class="form-control" placeholder="公告标题" aria-describedby="sizing-addon2" required name="nTitle">
+					</div>
+					<div class="gh-edit" style="margin-top: 20px; ">
+					    <span class="input-group-addon">内容</span>
+                        <script id="container" name="nContent" type="text/plain">
+                        </script>
+                        <script type="text/javascript" src="__PUBLIC__/teacher/edu/ueditor.config.js"></script>
+                        <!-- 编辑器源码文件 -->
+                        <script type="text/javascript" src="__PUBLIC__/teacher/edu/ueditor.all.min.js"></script>
+                        <!-- 实例化编辑器 -->
+                        <script type="text/javascript">
+                            var ue = UE.getEditor('container', {
+                                autoHeight: true,
+                                autoWidth: true
+                            });
+                             function sub(){
+                                 if(!ue.hasContents()){
+                                     alert("活动内容不能为空！");
+                                     return false;
+                                 }
+                             }
+                        </script>
+					</div>
+					<div class="row" style="margin-top:20px;padding-bottom: 20px">
+						<div class="col-xs-3 col-xs-offset-5">
+						   <button type="submit" class="btn btn-primary" style="width: 180px;">发布</button>
+					   </div>
+					</div>
+				</div>
+			 </form>
+				
+			</div>
+		</div>
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js"></script>
+	</body>
+
+</html>

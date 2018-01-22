@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>成绩管理</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/main.css" />
+		<style type="text/css">
+			table thead tr th,
+			table tbody tr td {
+				text-align: center;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="container-fluid">
+			<div class="page-header" style="margin-top: 10px;">
+				<h3 style="margin-top: 0;">成绩管理<small>成绩列表</small></h3>
+			</div>
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h4><i class="fa fa-list"></i>&nbsp;成绩列表</h4>
+				</div>
+				<div class="panel-body">
+					<form action="{:U('Exam/addGrade')}" method="post">
+						<div class="row">
+							<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<a href="#" id="btn-send" class="btn btn-success btn-block" data-toggle="modal" data-target=""><i class="fa fa-bullhorn"></i>发布成绩</a>
+								</div>
+							</div>
+							<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<a href="#" class="btn btn-success btn-block"><i class="fa fa-arrow-circle-down" ></i>成绩导出</a>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+								<table class="table table-bordered table-striped table-hover" id="ta">
+									<thead>
+										<tr>
+											<th>
+												<input type="checkbox"  id="selectAll" name=""/>
+											</th>
+											<th>序号</th>
+											<th>姓名</th>
+											<th>学号</th>
+											<th>性别</th>
+											<th>班级</th>
+											<th>考试科目</th>
+											<th style="width: 20%;">考试成绩</th>
+										</tr>
+									</thead>
+									<tbody id="tbList">
+										<foreach name="list" item="vo" key="i">
+										<tr>
+											<td>
+												<input type="checkbox" name="condition[]"  value="{$pId}&{$vo['list'][0]['sid']}&{$list[$i]['score']}" />
+											</td>
+											<td>
+												{$i+1}
+											</td>
+											<td>
+												{$vo['list'][0]['sname']}
+											</td>
+											<td>
+												{$vo['list'][0]['sid']}
+											</td>
+											<td>
+												{$vo['list'][0]['ssex']}
+											</td>
+											<td>
+												{$vo['list'][0]['sclass']}
+											</td>
+											<td>
+												{$cname}
+											</td>
+											<td>
+												{$list[$i]['score']}
+											</td>
+										</tr>
+										</foreach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<!--未选中发布项提示-->
+		<div class="modal fade" id="notselect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+					</div>
+					<div class="modal-body">
+						请先选择一项
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">好的</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--发布所选-->
+		<div class="modal fade" id="send-more" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">发布确认</h4>
+					</div>
+					<div class="modal-body">
+						确认发布所选项吗？
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success">确认</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+			//删除确认
+	var btn = document.getElementById('btn-send');
+	btn.addEventListener("click", function() {
+		var checkboxs = document.getElementById("tbList").getElementsByTagName('input');
+		console.log(checkboxs.length);
+		var checkedNumber = 0;
+		for(var i = 0; i < checkboxs.length; i++) {
+			console.log(checkboxs[i].checked);
+			if(checkboxs[i].checked) {
+				checkedNumber = checkedNumber + 1;
+			} else {
+				continue;
+			}
+		}
+		console.log(checkedNumber)
+		if(checkedNumber == 0) {
+			btn.setAttribute("data-target", "#notselect")
+		} else {
+			btn.setAttribute("data-target", "#send-more");
+		}
+	});
+	//全选、取消全选
+	var selectedRow = 0;
+	var checkArr = document.getElementById("tbList").getElementsByTagName("input");
+	var checkArrLen = checkArr.length;
+	var SelectAll = document.getElementById("selectAll");
+	SelectAll.addEventListener("click", function() {
+		//全选
+		if(SelectAll.checked == true) {
+			selectedRow = checkArrLen;
+			console.log(selectedRow);
+			for(var i = 0; i < checkArrLen; i++) {
+				checkArr[i].checked = true;
+			}
+		}
+		//取消全选
+		else {
+			selectedRow = 0;
+			console.log(selectedRow);
+			for(var j = 0; j < checkArrLen; j++) {
+				checkArr[j].checked = false;
+			}
+		}
+		//当逐行选择所有数据行后，全选框自动选择，当在全选状态下，有任何数据行被取消选择时，全选框自动取消选择
+	});
+	for(var i = 0; i < checkArrLen; i++) {
+		checkArr[i].addEventListener("click", function() {
+			var thisRow = this.parentNode.parentNode;
+			console.log(thisRow);
+			//点击之后如果该复选框checked状态为false，则selectRow减1
+			if(this.checked == false) {
+				thisRow.removeAttribute("class", "active");
+				selectedRow = selectedRow - 1;
+			}
+			//点击之后如果该复选框checked状态为true，则selectRow加1
+			else {
+				thisRow.setAttribute("class", "active"); //添加active css类
+				selectedRow = selectedRow + 1;
+			}
+			//当selectRow与tbody中的复选框数量一致时，全选复选框被选中吗
+			if(selectedRow == checkArrLen) {
+				SelectAll.checked = true;
+			} else {
+				SelectAll.checked = false;
+			}
+		});
+	}
+ </script>
+</body>
+</html>

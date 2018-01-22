@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+<title>后台登录</title> 
+ <link href="__PUBLIC__/admin/css/login.css" type="text/css" rel="stylesheet"> 
+ <link rel="stylesheet" href="__PUBLIC__/admin/css/bootstrap.min.css">
+<style type="text/css">
+    .testBox{
+       width: 100%;height: 35px;background-color:#fff;border-radius:5px;
+       box-shadow:1px 1px 5px #85A8B7;margin-top:10px;text-align: center; color:#27A9E3;overflow: hidden;line-height: 35px;display: none;
+    }
+    .logoImge{
+        display: inline-block;vertical-align: top;
+    }
+    .myInput{
+       position: relative;top:2px;left: -5px;
+    }
+</style>
+</head> 
+<body> 
+
+<div class="login">
+    <div class="message" style="white-space: nowrap;">
+        <img src="__PUBLIC__/student/images/logo.png" width="35px" height="30px"/>
+        在线考试系统-后台管理 
+    </div>
+    <div id="darkbannerwrap"></div>
+    <form onsubmit="return false">
+		<input name="userName" placeholder="用户名" required="required" value="17864159289"  type="text" id="uphone">
+		<hr class="hr15">
+		<input name="password" placeholder="密码" required="required" value="123456" type="password" id="pwd">
+    <hr class="hr15">
+    <input name="yzm" placeholder="验证码" required="required" type="text" style="width:168px;" id="yzm">
+     <a href="javascript:up()"><img src="{:U('Index/yzm')}" width="168px" height="50px;" title="点击更换" alt="验证码" id="img1"></a>
+		<hr class="hr15">
+        <span style="display: inline-block;width: 20px;"></span>
+        <label for="teacher" style="font-size: 14px;">
+            <input class="myInput" id="teacher" 
+             type="radio" name="userType" value="teacher" checked="checked" />教师
+        </label>
+        <span style="display: inline-block;width: 50px;"></span>
+        <label for="admin" style="font-size: 14px;">
+            <input class="myInput" id="admin" type="radio" value="admin" name="userType" />管理员
+        </label>    
+        <hr class="hr15">
+		    <input value="登录" style="width:100%;" type="submit" onclick="mit()">
+        <div class="testBox">
+         </div>
+	</form>
+</div>
+<script src="__PUBLIC__/admin/js/jquery-3.2.1.min.js"></script>
+<script src="__PUBLIC__/admin/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+   window.onload = function(){ 
+        if(window.parent.length>0) 
+         window.parent.location=location; 
+    } 
+</script>
+<script type="text/javascript">
+       
+      var url1 = "{:U('Index/checkyzm')}";
+      var url2 = "{:U('Index/login')}"
+      //更新验证码
+      function up(){
+        document.getElementById("img1").src="{:U('Index/yzm')}"+"?zz="+Math.random();
+      }
+      
+      function mit(){
+           var yzm1 = $("#yzm").val();
+           var user = $('form').serialize();
+           if($('#uphone').val() == '' || $('#pwd').val() == '' || $('#yzm').val() == ''){
+             return false;
+           }
+           //验证验证码
+           $.post(url1,{yzm:yzm1},function(data){
+                  if(data === "yzmno"){
+                       $('.testBox').show().html("<b>验证码错误！</b>");
+                       $('.login').css('paddingBottom','20px');
+                       $('#yzm').val('');
+                       up();
+                       return false;
+                  }
+                  else{
+                         $.post(url2,user,function(data){
+                         if(data === "teacherOk"){
+                              $('.testBox').show().html("<b>登陆成功，正在跳转...</b>");
+                              $('.login').css('paddingBottom','20px');
+                              window.location.href="{:U('./Back/Teacher/')}" ;
+                              return true;
+                         }
+                         else if(data === "adminOk"){
+                              $('.testBox').show().html("<b>登陆成功，正在跳转...</b>");
+                              $('.login').css('paddingBottom','20px');
+                              window.location.href="{:U('./Back/Admin/')}" ;
+                              return true;
+                         }
+                         else{
+                             $('.testBox').show().html("<b>账号和密码不匹配！</b>");
+                             $('.login').css('paddingBottom','20px');
+                             $('#pwd').val('');
+                             $('#yzm').val('');
+                             up();
+                             return false;
+                         }
+
+                   });
+
+                  }
+               
+            });
+      }
+           
+        
+    
+</script>
+</body>
+</html>

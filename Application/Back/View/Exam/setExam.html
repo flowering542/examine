@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>填写试卷信息</title>
+		<script type="text/javascript" src="__PUBLIC__/teacher/js/jedate/jedate.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+	  <link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<style type="text/css">
+			  .errStyle{
+                  display: inline-block;line-height: 0px;color: red;white-space: nowrap;
+        	 }
+        	 .wicon {
+		    background-image: url(__PUBLIC__/teacher/images/m1.png);
+		    background-repeat: no-repeat;
+		    background-position: right center;
+		    cursor: pointer;
+		}
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<h3 class="page-header" style="margin-top:10px;">试卷管理<small>新建试卷</small></h3>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h4><i class="fa fa-edit fa-lg"></i>&nbsp;填写试卷信息</h4>
+						</div>
+						<div class="panel-body">
+							<form onsubmit="return false;">
+							    <div class="row">
+									<div class="col-lg-6">
+										<h6>填写试卷访问码</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+											<input type="text" class="form-control" name="pCode" id="pCode" placeholder="考试访问码" required="required" />
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+										<span class="errStyle" id="pCode1"></span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<h6>填写考试名称</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+											<input type="text" class="form-control" name="pName" id="pName" placeholder="考试名称"  required="required" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<h6>选择考试科目</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+											<select data-toggle="select" class="form-control select select-success mrs mbm" name="cName">
+												  <volist name="list" id="vo">
+												    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+												  </volist>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<h6>填写考试开始时间</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+											<input type="text" class="form-control wicon" name="pBtime" id="pBtime" placeholder="开始时间" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<h6>填写考试结束时间</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group">
+										<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+											<input type="text" class="form-control wicon" name="pEtime" id="pEtime" placeholder="结束时间" />
+										</div>
+									</div>
+								</div>
+								<br />
+								<div class="row">
+									<div class="form-group">
+										<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+											<button type="submit" class="btn btn-success" id="btn"><a href="#" style="color: white;">保存进入下一步</a></button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+    <script type="text/javascript">
+    	 $(function(){
+    	 	   var b = false;
+    	 	   var url1 = "{:U('Exam/checkExam')}";
+    	       var url2 = "{:U('Exam/addExam')}";
+              $('#pCode').blur(function(event) {
+              	/* Act on the event */
+                var that1 = $(this);
+                if(that1.val().length === 0 || that1.val().length > 6){
+                       $('#pCode1').show().text("请输入1---6位的考试访问码！");
+                       b = false;
+                }
+                else{
+                	  $('#pCode1').hide().text("");
+                	  $.post(url1,{pCode:that1.val()},function(data){
+                               if(data < 1){
+                                    $('#pCode1').hide().text('');
+                                    b = true;
+                                   
+                               }
+                               else{
+                               	    $('#pCode1').show().text("考试访问码已存在！");
+                               	    b = false;
+                               }
+                	  })
+                }
+
+              });
+              $('#btn').click(function(){
+              	    if(b){
+                          var exam = $('form').serialize();
+                            //alert(exam);
+                            $.post(url2,exam,function(data){
+                                   if(data != false){
+                                   	    var list = $('form').find('input[type="text"]');
+                                   	    var count2 = list.length;
+                                   	    for(var i=0;i<count2;i++){
+                                   	    	 list[i].value = '';
+                                   	    }
+                                         document.location.href = "./toExam?pId="+data;
+                                   }
+                                   else{
+                                   	   alert("新建试卷失败！");
+                                   }
+                           });
+              	    }
+              })
+    	 })
+    </script>
+    <script type="text/javascript">
+		// jeDate.skin('green');
+		jeDate({
+		    dateCell:"#pBtime",
+		    format:"YYYY-MM-DD hh:mm:ss",
+		    isinitVal:false,  // 是否初始化
+		    skinCell:"jedatered",
+		    isTime:true, //是否显示时间
+		    minDate:"2015-01-01 00:00:00",
+		    festival:true,
+		    okfun:function(val){alert(val)}
+		});
+		jeDate({
+		    dateCell:"#pEtime",
+		    format:"YYYY-MM-DD hh:mm:ss",
+		    isinitVal:false,  // 是否初始化
+		    skinCell:"jedatered",
+		    isTime:true, //是否显示时间
+		    minDate:"2015-01-01 00:00:00",
+		    festival:true,
+		    okfun:function(val){alert(val)}
+		});
+</script>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>修改文件上传题</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/SCEditor/minified/themes/default.min.css" />
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="page-header" style="margin-top: 10px;">
+				<h3 style="margin-top:0px;">修改文件上传题</h3>
+			</div>
+           <form action="{:U('Teacher/modifyUpload')}" method="post"  enctype="multipart/form-data" class="form">
+                <input type="hidden" name="fId" value="{$list1['fid']}">
+		        <input type="hidden" name="quId" value="{$quId}" id="quId">
+		        <input type="hidden" name="sz" id="sz">
+				<div class="form-group">
+					<h4>试题</h4>
+					<textarea required="required" name="fTitle">{$list1['ftitle']}</textarea>
+				</div>
+				<div class="form-group">
+					<h6>上传文件</h6>
+					<div id="delDiv">
+						 <a href="javascript:void(0)" class="btn btn-primary" id="delBtn">删除重传</a>
+						 {$pm}
+					</div>	
+					<input type="file" name="myFile"  style="display: none" />
+				</div>
+				<div class="form-group">
+				   <div class="row">
+				   	    <div class="col-sm-6">
+				   	    	<h6>科目</h6>
+							<select name="cName" class="form-control" id="option2">
+								  <volist name="list2" id="vo">
+							    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+							    </volist>
+							</select>
+				   	    </div>
+				   </div>									
+				</div>
+				<div class="form-group">
+					<h6>分数</h6>
+					<input type="number" class="form-control" name="score" id="" value="{$list1['score']}" required="required" style="width: 300px;" />
+				</div>
+				<button type="submit" class="btn btn-success" data-dismiss="modal" style="width: 150px;">保存</button>
+			</form>
+		</div>
+		
+	    <script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js"></script>
+	    <script src="__PUBLIC__/teacher/SCEditor/minified/jquery.sceditor.bbcode.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("textarea").sceditor({
+				plugins: 'bbcode',
+				height: '150px',
+				width: '100%',
+				resizeEnabled: false,
+				toolbar: 'bold,italic,underline,strike,color,left,center,right,justify,font,size,table,bulletlist,orederedlist,link,subscript,superscript,image,code,date,time,maximize',
+				style: "minified/jquery.sceditor.default.min.css"
+			});
+		</script>
+	</body>
+<script type="text/javascript">
+      var url1 = "{:U('Teacher/modifyUpload')}";
+	  $(function(){
+    	 	  var cName = "{$list1['cname']}";
+    	 //	  var option1 = $('#option1').find("input[type='radio']");
+    	 	  var option2 = $('#option2').find('option');
+    	 //	  var count1 = option1.length;
+    	 	  var count2 = option2.length;
+    	 	  for(var i=0;i<count2;i++){
+                   if(option2[i].innerText === cName){
+                        option2[i].setAttribute('selected','selected');
+                        break;
+                   }
+    	 	  }
+    	 });
+	     $(function(){
+	     	 $('#delBtn').click(function(){
+    	 	  	   $.get(url1,{quId:$('#quId').val()},function(data){
+    	 	  	   	       $('#sz').val(data);
+                           $('#delDiv').hide();
+    	 	  	           $('input[type="file"]').show();
+    	 	  	   })
+    	 	  });
+	     })
+</script>
+</html>

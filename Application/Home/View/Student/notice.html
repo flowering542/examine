@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <title>
+            考试公告
+        </title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/notice.css" />
+        <link rel="shortcut icon" href="__PUBLIC__/student/images/logo.png">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/bootstrap.min.css" />
+      <!--   <script type="text/javascript" src="__PUBLIC__/student/js/notice.js">
+        </script> -->
+    </head>
+    
+    <body>
+        <div class="header">
+            <img src="__PUBLIC__/student/images/logo.png" alt="Online-Examination">
+            <div class="OnlineExamChName">
+                考试公告
+            </div>
+            <a href="{:U('Index/index')}" class="TeacherRegisterLink">
+                <button type="button" class="Return ">
+                    返回首页
+                </button>
+            </a>
+        </div>
+        <article class="container">
+            <div class="container">
+                <div id="container" class="masonry">
+                    <div class="row">
+                       <volist name="list" id="vo">
+                             <div id="Notice{$i}" class="col-lg-4 col-md-6 col-sm-8 col-xs-8">
+                            <a class="item masonry-brick" data-images="__PUBLIC__/student/images/{$i%3}.png">
+                                <img class="picture1" src="__PUBLIC__/student/images/{$i%5+1}.png" alt="">
+                                <div class="hidden1">
+                                    <p class="date">
+                                        {$vo['ndate']}
+                                    </p>
+                                    <div style="color:#fff;">
+                                        {$vo['ncontent']}
+                                    </div>
+                                </div>
+                                <h4>
+                                    <center>
+                                        {$vo['ntitle']}
+                                    </center>
+                                </h4>
+                            </a>
+                        </div>
+                       </volist>
+                    </div>
+                </div>
+        </article>
+        <footer>
+            <div class="col-lg-12 text-center">
+                <p>
+                    Copyright © OutlineTesting 1.0
+                </p>
+               <!--  <p>
+                    <a href="http://www.cjudge.net" target="_blank">
+                    </a>
+                    <pre>
+                        by &lt;a&gt;&lt;/a&gt;Team
+                    </pre>
+                </p> -->
+            </div>
+        </footer>
+        </div>
+    </body>
+
+</html>

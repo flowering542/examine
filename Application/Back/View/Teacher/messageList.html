@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>公告管理</title>
+		<link href="__PUBLIC__/teacher/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/main.css" />
+		<style type="text/css">
+			table thead tr th,
+			table tbody tr td {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12  col-md-12 col-xs-12 col-lg-12 main">
+					<div class="page-header">
+						<h3 style="margin-top: 10px;"><i class="fa fa-newspaper-o"></i>&nbsp;公告管理<small>公告列表</small></h3>
+					</div>
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h4><i class="fa fa-list"></i>&nbsp;公告列表</h4>
+						</div>
+						<div class="panel-body">
+							<form action="{:U('Teacher/messageList')}" method="post">
+								<div class="row">
+									<!--新建公告-->
+									<div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+										<div class="form-group">
+											<a href="announce.html" class="btn btn-success btn-block"><i class="fa fa-plus"></i>发布公告</a>
+										</div>
+									</div>
+									<!--通过关键字搜索-->
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+										<div class="input-group">
+											<input type="search" class="form-control" name="search"  placeholder="标题" />
+											<span class="input-group-btn"><button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button></span>
+										</div>
+									</div>
+								</div>
+							</form>
+								<!--公告列表-->
+								<div class="row">
+									<div class="col-lg-12 table-responsive">
+										<table class="table table-hover table-striped table-bordered">
+											<thead>
+												<tr>
+													<th>序号</th>
+													<th>标题</th>
+													<th>发布者</th>
+													<th>发布时间</th>
+													<th colspan="2">操作</th>
+												</tr>
+											</thead>
+											<tbody id="tbList">
+											 <volist name="list" id="vo" empty="$empty">
+											 	  <tr>
+													<td>{$i}</td>
+													<td>{$vo['ntitle']}</td>
+													<td>{$vo['tname']}</td>
+													<td>{$vo['ndate']}</td>
+													<td>
+														<a href="{:U('teacher/updMessage',array('nId'=>$vo['nid']))}" class="modify">
+															<i class="fa fa-edit"></i>修改
+														</a>
+													</td>
+													<td>
+														<a href="{:U('teacher/delMessage',array('nId'=>$vo['nid']))}" class="singleDel" onclick="return del();">
+															<i class="fa fa-trash"></i>删除
+														</a>
+													</td>
+												</tr>
+											 </volist>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+										 <ul class='pagination pag1' style="margin-top: 0;">
+								            <if condition="$page gt 1">
+								                <li><a href="{:U('Teacher/messageList',array('page'=>$page-1))}">&laquo;</a></li>
+								                <else/>
+								                <li><a href="#" class="btn" disabled="disabled">&laquo;</a></li>
+								            </if>
+								           <for start="1" end="$pageCount+1">
+								            <li><a href='{:U("Teacher/messageList?page=$i")}'>{$i}</a></li>
+								           </for>
+								            <if condition="$page lt $pageCount">
+								                <li><a href="{:U('Teacher/messageList',array('page'=>$page+1))}">&raquo;</a></li>
+								                <else/>
+								                <li><a href="#" class="btn" disabled="disabled">&raquo;</a></li>
+								            </if>
+								        </ul>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js"></script>
+	</body>
+    <script type="text/javascript">
+    	 function active(){
+           $(".pag1").children().eq(({$Think.get.page|default=1})).addClass('active');
+	    }
+	    active();
+	    function del(){
+	        return confirm("你确定删除吗？");
+	    }
+    </script>
+</html>

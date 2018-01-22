@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>个人中心</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="page-header" style="margin-top: 10px">
+				<h3 style="margin-top:5px;">个人中心</h3>
+			</div>
+			<div class="panel panel-success" style="width: 60%;">
+				<div class="panel-heading">
+					<h4>个人资料</h4>
+				</div>
+				<div class="panel-body">
+					<fieldset>
+						<legend style="padding-bottom: 10px;"><a href="{:U('Teacher/modifyPersonal')}" class="btn btn-success"><i class="fa fa-edit"></i>&nbsp;编辑用户资料</a>
+						</legend>
+						<dl class="dl-horizontal">
+							<dt>姓名：</dt>
+							<dd>{$list['tname']}</dd>
+							<dt>性别：</dt>
+							<dd>{$list['tsex']}</dd>
+							<dt>电话：</dt>
+							<dd>{$list['tphone']}</dd>
+							<dt>邮箱：</dt>
+							<dd>{$list['temail']|default="无"}</dd>
+						</dl>
+					</fieldset>		
+				</div>
+			</div>		
+		</div>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>成绩查询</title>
+			<link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/bootstrap.min.css" />
+			<link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/flat-ui.css" />
+			<link rel="shortcut icon" href="__PUBLIC__/student/images/logo.png">	
+	</head>
+
+	<body>
+		<nav class="nav navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">Online Test</a>
+				</div>
+			         <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{:U('Student/studentMessage')}">
+                                个人信息
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{:U('Student/testGrade')}">
+                                成绩查询
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{:U('Student/index')}">
+                                在线考试
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                                Emine
+                                <span class="navbar-unread">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">
+                                        我的消息
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider">
+                                </li>
+                                <li>
+                                    <a href="{:U('Index/login_out')}">
+                                        退出登录
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+				<!-- /.navbar-collapse -->
+			</div>
+		</nav>
+		<article class="container">
+		  <div class="page-header">
+                   <h4>考试成绩查询 &nbsp<small>Grade Searching</small></h4>
+          </div>
+		  <table class="table table-hover ">
+			<tr class="info">
+				<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">序号 </th>
+				<th class="col-lg-6 col-md-6 col-sm-6 col-xs-6">科目</th>
+				<th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">成绩</th>
+			</tr>
+			<volist name="list" id="vo">
+				 <tr>
+					<td>{$i}</td>
+					<td>{$vo['cname']}</td>
+					<td>{$vo['grade']}</td>
+			    </tr>
+			</volist>
+			
+          </table>
+		</article>
+		<footer>
+
+		</footer>
+		<script src="__PUBLIC__/student/js/jquery-3.2.1.min.js"></script>
+		<script  src="__PUBLIC__/student/js/bootstrap.min.js" /></script>
+	</body>
+
+</html>

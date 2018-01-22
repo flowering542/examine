@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="在线考试系统">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="__PUBLIC__/admin/images/logo.png">
+
+		<title>查询公告</title>
+
+		<link href="__PUBLIC__/admin/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/css/font-awesome.css">
+		<link href="__PUBLIC__/admin/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+		<link href="__PUBLIC__/admin/css/dashboard.css" rel="stylesheet">
+
+		<script src="__PUBLIC__/admin/js/ie-emulation-modes-warning.js"></script>
+		 <style type="text/css">
+        	 .navbar a:hover{
+                   color:#eee !important;
+        	 }
+        </style>
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #1775ba;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+					<a class="navbar-brand" href="#" style="color: #fff;">
+					<img src="__PUBLIC__/admin/images/logo.png" width="35" height="30" style="display: inline-block;vertical-align: top;"/>
+					在线考试系统后台管理</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#" style="color:#fff">你好！欢迎管理员</a>
+						</li>
+						<li>
+							<a href="{:U('Index/login_out')}" style="color: #fff;" onclick="return back();"><i class="fa fa-sign-out"></i>退出</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar" style="padding-top: 5px;">
+				    <ul class="nav nav-sidebar">
+						<li class="active">
+							<a href=""><i class="fa fa-newspaper-o"></i>公告管理</a>
+						</li>
+						<li>
+							<a href="{:U('Admin/sendMessage')}">发布公告</a>
+						</li>
+						<li>
+							<a href="{:U('Admin/index')}">查询公告</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active">
+							<a href="#"><i class="fa fa-mortar-board"></i>学生信息管理 </a>
+						</li>
+						<li>
+							<a href="{:U('Admin/sInfo')}">学生信息</a>
+						</li>
+						<li>
+							<a href="{:U('Admin/addStudent')}">添加学生信息</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active">
+							<a href=""><i class="fa fa-users"></i>教师信息管理</a>
+						</li>
+						<li>
+							<a href="{:U('Admin/tInfo')}">教师信息</a>
+						</li>
+						<li>
+							<a href="{:U('Admin/addTeacher')}">添加教师信息</a>
+						</li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active">
+							<a href="#"><i class="fa fa-book"></i>课程管理</a>
+						</li>
+						<li>
+							<a href="{:U('Admin/classManage')}">课程信息</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+					<h2 class="sub-header"><i class="fa fa-newspaper-o" style="color: #31b0d5;"></i>&nbsp;查询公告</h2>
+					<div class="st-search">
+						<form class="form-inline" action="{:U('Admin/index')}" method="post">
+							<a type="button" class="btn btn-success" href="{:U('Admin/sendMessage')}"><i class="fa fa-plus"></i>添加新公告</a>
+							<div class="form-group">
+								<input type="text" class="form-control" id="form-stsearch" name="search" placeholder="请输入公告标题">
+							</div>
+							<button type="submit" class="btn btn-default">搜索</button>
+						</form>
+					</div>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr class="bg-primary">
+									<th>序号</th>
+									<th>标题</th>
+									<th>发布时间</th>
+									<th colspan="2">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+							 <volist name="list" id="vo" empty="$empty">
+							 	 <tr>
+									<td>{$i}</td>
+									<td>{$vo['ntitle']}</td>
+									<td>{$vo['ndate']}</td>
+									<td>
+										<a href="{:U('Admin/updateMessage',array('nId'=>$vo['nid']))}"><i class="fa fa-edit" style="color:green"></i>修改</a>
+									</td>
+									<td>
+										<a href="{:U('Admin/deleteMessage',array('nId'=>$vo['nid']))}"  onclick="return del()"><i class="fa fa-remove" style="color:red"></i>删除</a>
+									</td>
+								</tr>
+							 </volist>
+							</tbody>
+						</table>
+					</div>
+					<div class="fenye">
+						 <ul class='pagination pag1' style="margin-top: 0;">
+				            <if condition="$page gt 1">
+				                <li><a href="{:U('Admin/index',array('page'=>$page-1))}">&laquo;</a></li>
+				                <else/>
+				                <li><a href="#" class="btn" disabled="disabled">&laquo;</a></li>
+				            </if>
+				           <for start="1" end="$pageCount+1">
+				            <li><a href='{:U("Admin/index?page=$i")}'>{$i}</a></li>
+				           </for>
+				            <if condition="$page lt $pageCount">
+				                <li><a href="{:U('Admin/index',array('page'=>$page+1))}">&raquo;</a></li>
+				                <else/>
+				                <li><a href="#" class="btn" disabled="disabled">&raquo;</a></li>
+				            </if>
+				        </ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+
+		<script src="__PUBLIC__/admin/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__/admin/js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__/admin/js/holder.min.js"></script>
+		<script src="__PUBLIC__/admin/js/ie10-viewport-bug-workaround.js"></script>
+	</body>
+    <script type="text/javascript">
+    function active(){
+        $(".pag1").children().eq(({$Think.get.page|default=1})).addClass('active');
+    }
+    active();
+    function del(){
+        return confirm("你确定删除吗？");
+    }
+    function back(){
+         return confirm("确定退出吗？");
+    }
+    </script>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>试卷管理</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/main.css" />
+		<style type="text/css">
+			table thead tr th,
+			table tbody tr td {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<h3 class="page-header">试卷管理<small>试卷列表</small></h3>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h4><i class="fa fa-list"></i>&nbsp;试卷列表</h4>
+						</div>
+						<div class="panel-body">
+							<div class="exam-list">
+								<div class="row">
+									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+										<!--跳转到新建试卷-->
+										<a href="{:U('Exam/setExam')}" class="btn btn-success btn-block" ><i class="fa fa-plus fa-lg"></i>新建试卷</a>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+										<!--删除选中试题，未选中便删除弹出提示框提醒选择，选中之后点击弹出提示框题型是否确认删除-->
+										<a href="#" class="btn btn-default btn-block" id="btn-del" data-toggle="modal" data-target=""><i class="fa fa-trash fa-lg"></i>删除试卷</a>
+									</div>
+									<div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 pull-right">
+									<form action="{:U('Exam/examList')}" method="post">
+										<!--搜索-->
+										<div class="input-group">
+											<input type="search" class="form-control" name="search"  placeholder="试卷名称" />
+											<span class="input-group-btn"><button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button></span>
+										</div>
+									</form>
+									</div>
+
+								</div>
+								<!--试题列表-->
+								<form action="{:U('Exam/delTest')}" method="post">
+								 <div class="row" style="margin-top: 15px;">
+									<div class="col-md-12 table-responsive">
+										<table class="table table-hover table-striped table-bordered	">
+											<thead>
+												<tr>
+													<th><input type="checkbox"  id="selectAll" value="" /></th>
+													<th>序号</th>
+													<th>考试访问码</th>
+													<th>试卷名称</th>
+													<th>组卷人</th>
+													<th>考试科目</th>
+													<th colspan="2">操作</th>
+												</tr>
+											</thead>
+											<tbody id="tbList">
+											<volist name="list" id="vo">
+												  <tr>
+													<td><input type="checkbox"  name="condition[]"  value="{$vo['pid']}" /></td>
+													<td>{$i}</td>
+													<td>{$vo['pcode']}</td>
+													<td>{$vo['pname']}</td>
+													<td>{$vo['tname']}</td>
+													<td>{$vo['cname']}</td>
+													<td>
+														<a href="{:U('Exam/modifyExam',array(pId=>$vo['pid']))}"><i class="fa fa-edit"></i>修改</a>
+													</td>
+													<td>
+														<a href="{:U('Exam/toExam',array(pId=>$vo['pid']))}"><i class="fa fa-edit"></i>组卷</a>
+													</td>
+												</tr>
+											</volist>
+											</tbody>
+										</table>
+									</div>
+								</div>
+									<!--批量删除-->
+								<div class="modal fade" id="delete-more" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">删除确认</h4>
+											</div>
+											<div class="modal-body">
+												确认删除选中的试题吗？
+											</div>
+											<div class="modal-footer">
+											    <button type="submit" class="btn btn-primary">确认</button>
+												<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+								
+								<!--翻页-->
+								<div class="row">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+										<nav aria-label="Page navigation">
+											<ul class='pagination pag1' style="margin-top: 0;">
+								            <if condition="$page gt 1">
+								                <li><a href="{:U('Exam/examList',array('page'=>$page-1))}">&laquo;</a></li>
+								                <else/>
+								                <li><a href="#" class="btn" disabled="disabled">&laquo;</a></li>
+								            </if>
+								           <for start="1" end="$pageCount+1">
+								            <li><a href='{:U("Exam/examList?page=$i")}'>{$i}</a></li>
+								           </for>
+								            <if condition="$page lt $pageCount">
+								                <li><a href="{:U('Exam/examList',array('page'=>$page+1))}">&raquo;</a></li>
+								                <else/>
+								                <li><a href="#" class="btn" disabled="disabled">&raquo;</a></li>
+								            </if>
+								        </ul>
+										</nav>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal -->
+		<!--未选中删除项提示-->
+		<div class="modal fade" id="notselect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+					</div>
+					<div class="modal-body">
+						请先选择一项
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/Control.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	 <script type="text/javascript">
+	    function active(){
+	        $(".pag1").children().eq(({$Think.get.page|default=1})).addClass('active');
+	    }
+	    active();
+	    function del(){
+	        return confirm("你确定删除吗？");
+	    }
+	     function back(){
+	         return confirm("确定退出吗？");
+	    }
+    </script>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>
+            考生管理
+        </title>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/flat-ui.css" />
+        <link rel="shortcut icon" href="__PUBLIC__/student/images/logo.png">
+        <style type="text/css">
+            .form-control[disabled]{
+               color:black;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <nav class="nav navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">
+                            Toggle navigation
+                        </span>
+                        <span class="icon-bar">
+                        </span>
+                        <span class="icon-bar">
+                        </span>
+                        <span class="icon-bar">
+                        </span>
+                    </button>
+                    <a href="#" class="navbar-brand">
+                        Online Test
+                    </a>
+                </div>
+                     <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="{:U('Student/studentMessage')}">
+                                个人信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{:U('Student/testGrade')}">
+                                成绩查询
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{:U('Student/index')}">
+                                在线考试
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                                Emine
+                                <span class="navbar-unread">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">
+                                        我的消息
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider">
+                                </li>
+                                <li>
+                                    <a href="{:U('Index/login_out')}">
+                                        退出登录
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </nav>
+        <article class="container">
+            <div class="page-header text-primary">
+                <h4>
+                    <span class="badge">
+                        1
+                    </span>
+                    学生基本信息
+                    <small>
+                        Personal Information
+                    </small>
+                </h4>
+            </div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputName3" class="col-sm-2 control-label">
+                        姓名:
+                    </label>
+                    <div class="input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true">
+                            </span>
+                        </span>
+                         <!-- <p class="form-control-static">email@example.com、</p> -->
+                        <input type="name" class="form-control disabled" id="inputName3" placeholder="{$list['sname']}" value="{$list['sname']}" 
+                        style="width:250px;" disabled="disabled">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputStudentNumber" class="col-sm-2 control-label">
+                        学号:
+                    </label>
+                    <div class=" input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" id="inputStudentNumber" placeholder="201511105053" value="{$list['sid']}"
+                        style="width:250px;" disabled="disabled">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputClass" class="col-sm-2 control-label">
+                        班级:
+                    </label>
+                    <div class="input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" id="inputClass" placeholder=" 软测152" value="{$list['sclass']}"
+                        style="width:250px;" disabled="disabled">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputSex" class="col-sm-2 control-label">
+                        性别:
+                    </label>
+                    <div class="input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon1">
+                            <span class="glyphicon glyphicon-ice-lolly" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" id="inputSex" placeholder=" 男"
+                        value="{$list['ssex']}"
+                        style="width:250px;" disabled="disabled">
+                    </div>
+                </div>
+            </form>
+            <div class="page-header text-primary">
+                <h4>
+                    <span class="badge">
+                        2
+                    </span>
+                    联系方式
+                    <small>
+                        Contect Information
+                    </small>
+                </h4>
+            </div>
+            <form class="form-horizontal" id="form1">
+                <input type="hidden" name="sId" value="{$list['sid']}">
+                <div class="form-group">
+                    <label for="inputPhoneNum" class="col-sm-2 control-label">
+                        手机号:
+                    </label>
+                    <div class=" input-group col-sm-10 ">
+                        <span class="input-group-addon" id="basic-addon1" style="width:41px;height:42px;position:absolute;">
+                            <span class="glyphicon glyphicon-phone" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" id="inputPhoneNum" placeholder="请输入你的手机号码"
+                        style="width:400px;margin-left:41px;" value="{$list['sphone']}" name="sPhone" required="required">
+                        &nbsp&nbsp&nbsp&nbsp
+                        <p class="msg" style="display:none">
+                            请输入你的手机号码
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmailAdd" class="col-sm-2 control-label">
+                        邮箱:
+                    </label>
+                    <div class="input-group col-sm-10 ">
+                        <span class="input-group-addon" id="basic-addon1" style="width:41px;height:42px;position:absolute;">
+                            <span class="glyphicon glyphicon-envelope" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" id="inputEmailAdd" placeholder="请输入你的邮箱"
+                        style="width:400px; margin-left:41px;" value="{$list['semail']}" name="sEmail" required="required">
+                        &nbsp&nbsp&nbsp&nbsp
+                        <p class="msg" style="display:none">
+                            请输入你的邮箱
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10" style="padding-left:0;padding-right:0;">
+                        <button type="button" id="btn1" class="btn btn-primary btn-lg" data-toggle="modal">
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="page-header text-primary">
+                <h4>
+                    <span class="badge">
+                        3
+                    </span>
+                    修改密码
+                    <small>
+                        Modify Password
+                    </small>
+                </h4>
+            </div>
+            <form class="form-horizontal" id="form2">
+                <input type="hidden" name="sId" value="{$list['sid']}">
+                <div class="form-group">
+                    <label for="inputOldPassword" class="col-sm-2 control-label">
+                        旧密码:
+                    </label>
+                    <div class="input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon1" style="width:41px;height:42px;position:absolute;">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="password" class="form-control" id="inputOldPassword" placeholder="旧密码"
+                        style="width:350px;margin-left:41px;" name="sPwd" required="required">
+                           &nbsp;&nbsp;
+                        <span id="msg1" style="display:none">
+                            
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputNewPassword" class="col-sm-2 control-label">
+                        新密码:
+                    </label>
+                    <div class="input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon2" style="width:41px;height:42px;position:absolute;">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="password" class="form-control" id="inputNewPassword" placeholder="新密码"
+                        style="width:350px;margin-left:41px;" name="sPwd1" required="required">
+                        &nbsp;&nbsp;
+                        <p class="msg" style="display:none">
+                            请输入新的密码
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group" id="form2">
+                    <label for="confirmPassword" class="col-sm-2 control-label">
+                        确认新密码:
+                    </label>
+                    <div class=" input-group col-sm-10">
+                        <span class="input-group-addon" id="basic-addon3" style="width:41px;height:42px;position:absolute;">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true">
+                            </span>
+                        </span>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="确认新密码"
+                        style="width:350px;margin-left:41px;" name="sPwd2" required="required">
+                       &nbsp;&nbsp;
+                        <p class="msg" style="display:none">
+                           请再一次确认你的密码
+                        </p>
+                    </div>
+					    
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10" style="padding-left:0;padding-right:0;">
+                        <button type="button" class="btn btn-primary btn-lg" id="btn2" data-toggle="modal"
+                        >
+                            修改
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </article>
+        <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                &times;
+                            </span>
+                        </button>
+                        <h4 class="modal-title">
+                            保存成功！
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            点击关闭按钮继续修改个人信息&hellip;
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                            关闭
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        </br>
+        </br>
+        <footer>
+            <div class="alert alert-success" role="alert" style="margin-bottom: 0px;">
+                <a href="#" class="alert-link">
+                    <center>
+                        Copyright © Online Test
+                    </center>
+                </a>
+                <a href="#" class="alert-link">
+                    <center>
+                        by &lt;a&gt;&lt;/a&gt;Team
+                    </center>
+                </a>
+            </div>
+        </footer>
+        <script src="__PUBLIC__/student/js/jquery-3.2.1.min.js">
+        </script>
+        <script src="__PUBLIC__/student/js/bootstrap.min.js" />
+        </script>
+    </body>
+    <script type="text/javascript">
+            $(function(){
+              var url1 = "{:U('Student/modifyLink')}";
+              var url2 = "{:U('Student/modifyPwd')}";
+              $('#btn1').click(function() {
+                  /* Act on the event */
+                  if(arr1[0]&&arr1[1]){
+                      var link = $('#form1').serialize();
+                      $.post(url1,link,function(data){
+                        if(data === "ok"){
+                         $("#myModal").modal({
+                        //    remote:"test/test.jsp";//可以填写一个url，会调用jquery load方法加载数据
+                        //    backdrop:"static";//指定一个静态背景，当用户点击背景处，modal界面不会消失
+                            keyboard:true,//当按下esc键时，modal框消失
+                            });
+                          $('.msg').each(function(index, el) {
+                               $(this).hide();
+                          });
+                        }
+                      })
+                  }   
+              });
+              $('#btn2').click(function() {
+                  if(arr2[0]&&arr2[1]){
+                      var link = $('#form2').serialize();
+                     // alert(link);
+                      $.post(url2,link,function(data){
+                        if(data === "ok"){
+                         $("#myModal").modal({
+                            keyboard:true, });
+                          $('.msg').each(function(index, el) {
+                               $(this).hide();
+                          });
+                          $('#form2').find('input[type="password"]').each(function(){
+                                $(this).val('');
+                          })
+                         }
+                         else{
+                              $('#msg1').show().text("原密码输入不正确！");
+                              $('.msg').each(function(index, el) {
+                               $(this).hide();
+                            });
+                         }
+                      })
+                  }   
+              });
+              $('#inputOldPassword').focus(function(event) {
+                  /* Act on the event */
+                  $('#msg1').hide();
+              });
+         });
+function getLength(str){
+    return str.replace(/^\x00-xff/g,"xx").length;
+}
+var arr1 = [true,true];
+var arr2 = [true,true];
+window.onload = function(){
+      var oPhone = document.getElementById('inputPhoneNum');
+      var eMail = document.getElementById('inputEmailAdd');
+      var pwd =document.getElementById('inputNewPassword');
+      var pwd2 =document.getElementById('confirmPassword');
+      var aP=document.getElementsByTagName('p');
+      var oPhone_msg=aP[0];
+      var eMail_msg=aP[1];
+      var pwd_msg=aP[2];
+      var pwd2_msg=aP[3];
+      
+       //邮箱验证
+   eMail.onfocus=function(){
+       eMail_msg.style.display="inline";
+   }
+   eMail.onblur=function(){
+       var re_e= /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/g;
+       if(!re_e.test(this.value)){
+          arr1[0] = false;
+          eMail_msg.innerHTML='<i class="err"></i>请输入正确的邮箱!!';
+       }
+       else{
+           arr1[0] = true;
+           eMail_msg.innerHTML='<i class="ok"></i>验证通过&nbsp<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+       }
+   }
+   //手机号验证
+   oPhone.onfocus=function(){
+       oPhone_msg.style.display="inline";
+   }
+   oPhone.onblur=function(){
+       var re_p = /^[1][3578][0-9]{9}$/;
+       if(!re_p.test(this.value)){
+           arr1[1] = false;
+           oPhone_msg.innerHTML='<i class="err"></i>请输入正确的手机号!!';
+           
+       }
+       else{
+           arr1[1] = true;
+           oPhone_msg.innerHTML='<i class="ok"></i>手机号验证通过&nbsp<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+       }
+   }
+   //密码
+   pwd.onfocus=function(){
+       pwd_msg.style.display="inline";
+       
+   }
+   pwd.onblur=function(){
+       //不能为空
+       if(this.value===""){
+           arr2[0] = false;
+           pwd_msg.innerHTML='<i class="err"></i>不能为空!';
+       }
+       //OK
+       else{
+           arr2[0] = true;
+           pwd_msg.innerHTML='<i class="ok"></i>&nbsp<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+       }
+    }
+   //确认密码
+     pwd2.onfocus=function(){
+       pwd2_msg.style.display="inline";
+       
+    }
+    pwd2.onblur=function(){
+        if(this.value===""){
+           arr2[1] = false;
+           pwd2_msg.innerHTML='<i class="err"></i>不能为空!';
+       }
+       else if(this.value!=pwd.value){
+           arr2[1] = false;
+        pwd2_msg.innerHTML='<i class="err"></i>两次输出的密码不一致,请重新输入!!';
+           
+       }
+       else{
+            arr2[1] = true;
+            pwd2_msg.innerHTML='<i class="ok"></i>&nbsp<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>';
+       }
+    } 
+}
+    </script>
+</html>

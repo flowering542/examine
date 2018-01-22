@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>待批改试卷</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<style type="text/css">
+			table thead tr th,
+			table tbody tr td{
+				text-align: center;	
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="page-header" style="margin-top:10px;">
+				<h3 style="margin-top: 0;">试卷管理<small>待批改试卷</small></h3>
+			</div>
+			<div class="panel panel-success">
+				<div class="panel-heading" >
+					<h4><i class="fa fa-gift"></i>&nbsp;待批改试卷列表</h4>
+				</div>
+				<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<table class="table table-bordered table-hover table-striped">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>考试访问码</th>
+											<th>试卷名称</th>
+											<th>考试者</th>
+											<th>考试时间</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody id="tbList">
+									<foreach name="list1" item="vo" key="i">
+										 <tr>
+											<td>{$i+1}</td>
+											<td>{$list2[$i]['data'][0]['pcode']}</td>
+											<td>{$list2[$i]['data'][0]['pname']}</td>
+											<td>{$vo['sname']}</td>
+											<td>{$list2[$i]['data'][0]['pbtime']}</td>
+											<td>
+												<a href="{:U('Exam/correcting',array('pId'=>$list2[$i]['data'][0]['pid'],'sId'=>$vo['sid']))}"><i class="fa fa-edit"></i>批卷</a>
+											</td>
+										</tr>
+									</foreach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

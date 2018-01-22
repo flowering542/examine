@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <title>
+            在线考试系统
+        </title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/register.css" />
+        <link rel="shortcut icon" href="__PUBLIC__/student/images/logo.png">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/bootstrap.min.css" />
+        <script type="text/javascript" src="__PUBLIC__/student/js/register.js">
+        </script>
+        <style type="text/css">
+             .myInputGroup{margin-bottom: 15px;}
+             .err{border: 1px solid #d9d9d9;margin-top: 60px;box-shadow: 1px 2px 1px #d9d9d9;border-radius: 3px;display: none;}
+             .list-group{padding-left: 5px;}
+        </style>
+    </head>
+    
+    <body>
+        <nav class="navtop" role="navigation">
+            <div class="header">
+                <img src="__PUBLIC__/student/images/logo.png" alt="Online-Examination">
+                <div class="OnlineExamChName">
+                    在线考试系统
+                </div>
+                <a href="#" class="TeacherRegisterLink">
+                    <a href="{:U('Back/Index')}" type="button" class="TeacherRegister ">
+                        教师登录
+                    </a>
+                </a>
+            </div>
+        </nav>
+        <div class="container">
+            <!-- 模态框 1 -->
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    &times;
+                                </span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                {$list[0]['ntitle']|default="暂无更多的消息"}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                               {$list[0]['ncontent']|default="敬请期待"}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 模态框 2 -->
+            <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    &times;
+                                </span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                {$list[1]['ntitle']|default="暂无更多的消息"}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                                {$list[1]['ncontent']|default="敬请期待"}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 模态框 3 -->
+            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    &times;
+                                </span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                {$list[2]['ntitle']|default="暂无更多的消息"}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                                {$list[2]['ncontent']|default="敬请期待"}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 模态框 4 -->
+            <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    &times;
+                                </span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                {$list[3]['ntitle']|default="暂无更多的消息"}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                                {$list[3]['ncontent']|default="敬请期待"}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 模态框 5 -->
+            <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">
+                                    &times;
+                                </span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                {$list[4]['ntitle']|default="暂无更多的消息"}
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                                {$list[4]['ncontent']|default="敬请期待"}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Main row">
+                <div class="col-lg-3 col-md-5 col-sm-10 col-xs-10">
+                    <div class="list">
+                        <a href="{:U('Index/notice')}" class="More">
+                            more
+                        </a>
+                        <a href="#" class="list-top">
+                            最新考试公告
+                        </a>
+                        <a href="#" class="list-group" data-toggle="modal" data-target="#myModal1" style="margin-bottom: 10px;">
+                            <span class="badge">
+                                1
+                            </span>
+                                {$list[0]['ntitle']|default="暂无更多的消息"}&nbsp;&nbsp;
+                                {$list[0]['ndate']}
+                        </a>
+                        <a href="#" class="list-group" data-toggle="modal" data-target="#myModal2" style="margin-bottom: 10px;">
+                            <span class="badge">
+                                2
+                            </span>
+                                {$list[1]['ntitle']|default="暂无更多的消息"}&nbsp;&nbsp;
+                                {$list[1]['ndate']}
+                        </a>
+                        <a href="#" class="list-group" data-toggle="modal" data-target="#myModal3" style="margin-bottom: 10px;">
+                            <span class="badge">
+                                3
+                            </span>
+                                {$list[2]['ntitle']|default="暂无更多的消息"}&nbsp;&nbsp;
+                                {$list[2]['ndate']}
+                        </a>
+                        <a href="#" class="list-group" data-toggle="modal" data-target="#myModal4" style="margin-bottom: 10px;">
+                            <span class="badge">
+                                4
+                            </span>
+                            {$list[3]['ntitle']|default="暂无更多的消息"}&nbsp;&nbsp;
+                            {$list[3]['ndate']}
+                        </a>
+                        <a href="#" class="list-group" data-toggle="modal" data-target="#myModal5" style="margin-bottom: 10px;">
+                            <span class="badge">
+                                5
+                            </span>
+                              {$list[4]['ntitle']|default="暂无更多的消息"}&nbsp;&nbsp;
+                              <span>{$list[4]['ndate']}</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10">
+                    <div id="slideBox">
+                        <div id="slide" style="left:-550px;">
+                            <img src="__PUBLIC__/student/images/Slide5.jpg" alt="images" width="550px" height="350px" class=""/>
+                            <img src="__PUBLIC__/student/images/Slide1.jpg" alt="" width="550px" height="350px" class=""/>
+                            <img src="__PUBLIC__/student/images/Slide2.jpg" alt="" width="550px" height="350px" class=""/>
+                            <img src="__PUBLIC__/student/images/Slide3.jpg" alt="" width="550px" height="350px" class=""/>
+                            <img src="__PUBLIC__/student/images/Slide4.jpg" alt="" width="550px" height="350px" class=""/>
+                            <img src="__PUBLIC__/student/images/Slide5.jpg" alt="" width="550px" height="350px" class=""/>
+                            <img src="__PUBLIC__/student/images/Slide1.jpg" alt="" width="550px" height="350px" class="" />
+                        </div>
+                        <div id="buttons">
+                            <span id="span1" index="1" class="on">
+                            </span>
+                            <span id="span1" index="2">
+                            </span>
+                            <span id="span1" index="3">
+                            </span>
+                            <span id="span1" index="4">
+                            </span>
+                            <span id="span1" index="5">
+                            </span>
+                        </div>
+                        <i class="fa fa-angle-left fa-2x">
+                        </i>
+                        <i class="fa fa-angle-right fa-2x">
+                        </i>
+                        <!-- 控制按钮 -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-8 col-sm-10 col-xs-10">
+                    <div class="join">
+                        学生登录&nbsp&nbsp
+                        <i class="fa fa-hand-o-down">
+                        </i>
+                    </div>
+                    <div class="forms">
+                        <form onsubmit="return false;" class="form">
+                            <div class="input-group myInputGroup">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user">
+                                    </i>
+                                </span>
+                                <input type="text" class="form-control" required="required" name="sId"
+                                id="sId" placeholder="学号" style="padding-left:15px;" />
+                            </div>
+                            <div class="input-group myInputGroup">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock">
+                                    </i>
+                                </span>
+                                <input type="password" class="form-control" required="" name="sPwd"
+                                id="sPwd" placeholder="密码" style="padding-left:15px;" />
+                            </div>
+                            <button type="button" class="btn btn-primary col-md-12 col-sm-12 col-xs-12" onclick="mit();">
+                                登录
+                            </button>
+                            <div class="text-center err">
+                                <span id="err"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer style="margin-top: 86px;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            Copyright © OutlineTesting 1.0
+                        </p>
+                      <!--   <p>
+                            <a href="http://www.cjudge.net" target="_blank">
+                            </a>
+                            <pre>
+                                by &lt;a&gt;&lt;/a&gt;Team
+                            </pre>
+                        </p> -->
+                    </div>
+                </div>
+            </footer>
+            <script src="__PUBLIC__/student/js/jquery-3.2.1.min.js">
+            </script>
+            <script src="__PUBLIC__/student/js/bootstrap.min.js" />
+            </script>
+    </body>
+    <script type="text/javascript">
+      var url1 = "{:U('Index/login')}";
+      function mit(){
+           var stu = $('form').serialize();
+           //alert(stu);
+           if($('#sId').val() == '' || $('#sPwd').val() == ''){
+                $('.err').show();
+                $('#err').show().addClass('text-danger').text('请输入完整的学号或者密码！');
+                return false;
+           }
+           else if(!checkId($('#sId').val())){
+                $('.err').show();
+                $('#err').show().addClass('text-danger').text('请输入合法的学号！');
+                $('#sPwd').val('');
+                return false;
+           }
+           else{
+               $('.err').hide();
+               $('#err').hide().text('').removeAttr('class');
+           }
+           $.post(url1,stu,function(data){
+                  if(data === "ok"){
+                     $('.err').show();
+                     $('#err').show().addClass('text-success').text('登陆成功，正在跳转...');
+                      document.location.href = "{:U('Student/index')}"
+                  }
+                  else{
+                      $('.err').show();
+                      $('#err').show().addClass('text-danger').text('账号或者密码输入不正确！');
+                      $('#sPwd').val('');
+                  }
+           });
+
+      }
+           //判断合法的学号
+     function checkId(str){
+         var patt = /^\d{8,12}$/;
+         if(patt.test(str)){
+            return true;
+         }
+         return false;
+     }
+    </script>
+</html>

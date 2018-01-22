@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>试题列表</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/SCEditor/minified/themes/default.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/main.css" />
+		<style type="text/css">
+			table thead tr th,
+			table tbody tr td {
+				text-align: center;
+			}
+			
+			.question {
+				border-left: #3faba4 2px solid;
+				margin-bottom: 5px;
+				background-color: #f6fbfc;
+				padding: 10px;
+				overflow: hidden;
+				position: relative;
+			}
+			
+			.question .details {
+				width: 100%;
+				margin-left: -50px;
+				float: left;
+			}
+			
+			.question .details .content {
+				margin-left: 50px;
+			}
+			table{
+			table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+			}
+			td{
+			width:100%;
+			word-break:keep-all;/* 不换行 */
+			white-space:nowrap;/* 不换行 */
+			overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+			text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<h3 class="page-header">题库管理<small>试题列表</small></h3>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h4><i class="fa fa-check-square-o fa-lg"></i>&nbsp;添加试题到试卷</h4>
+						</div>
+						<div class="panel-body">
+						<!-- 	<form class="form" action="#" method="post"> -->
+								<div class="row">
+									<!--添加试题按钮-->
+									<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+										<div class="form-group">
+											<a href="#" class="btn btn-success btn-block" data-toggle="modal" data-target="#addQuestions"><i class="fa fa-plus"></i>添加试题</a>
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+										<div class="form-group">
+											<a href="#" id="btn-del" class="btn btn-default btn-block" id="btn-del" data-toggle="modal" data-target=""><i class="fa fa-trash"></i>删除试题</a>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 table-responsive">
+									<form action="{:U('Exam/delExam')}" method="post">
+										<table class="table table-bordered table-hover table-striped">
+											<thead>
+												<tr>
+													<th style="width: 30px;"><input type="checkbox" class="checkbox" id="selectAll" /></th>
+													<th style="width: 8%">序号</th>
+													<th style="width: 40%;">题目</th>
+													<th>题型</th>
+													<th>分数</th>
+													<th style="width: 20%;">操作</th>
+												</tr>
+											</thead>
+											<tbody id="tbList">
+												 <volist name="list2" id="vo">
+												 <tr quId="{$vo['quid']}" quType="{$vo['qutype']}">
+													<td><input type="checkbox" class="checkbox" name="condition[]" value="{$vo[pid]}&{$vo[tid]}" /></td>
+													<td>{$i}</td>
+													<td>{$vo['qutitle']}</td>
+													<td>{$vo['qutype']}</td>
+													<td>
+													<input type="text" size="3" style="display: none">
+													<span>{$vo['score']}</span>
+													</td>
+													<td>
+														<!--如果题型改变，替换href-->
+														<a href="#"><i class="fa fa-edit"></i>修改分数</a>
+													</td>
+												 </tr>
+												 </volist>
+											</tbody>
+										 <!--批量删除-->
+										  <div class="modal fade" id="delete-more" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalLabel">删除确认</h4>
+													</div>
+													<div class="modal-body">
+														确认删除选中的试题吗？
+													</div>
+													<div class="modal-footer">
+													    <button type="submit" class="btn btn-primary">确认</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>		
+													</div>
+												</div>
+											</div>
+										</div>
+										</form>
+										</table>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!--添加试题操作Modal-->
+     <div class="modal fade" id="addQuestions" tabindex="-1" 
+     role="dialogaria-l" abelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        &times;
+                    </span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加试题到试卷
+                </h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav navbar nav-tabs" role="tablist">
+                    <li class="active" role="presentation">
+                        <a href="#selectQuestions" aria-controls="selectQuestions" role="tab"
+                        data-toggle="tab">
+                            从题库中选择试题
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#createQuestion" aria-controls="createQuestion" role="tab" data-toggle="tab">
+                            <i class="fa fa-plus">
+                            </i>
+                            新增试题
+                        </a>
+                    </li>
+                </ul>
+                <!--tab panes-->
+                <div class="tab-content">
+                    <!--从题库中选题-->
+                    <div role="tabpanel" class="tab-pane active" id="selectQuestions">
+                        <form action="{:U('Exam/toExam')}" method="post" class="form" id="form1">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="form-group">
+                                        <select name="quType" class="form-control" id="option1">
+                                            <option value="">
+                                             全部
+                                            </option>
+                                            <option value="单选题">
+                                                单选题
+                                            </option>
+                                            <option value="多选题">
+                                                多选题
+                                            </option>
+                                            <option value="判断题">
+                                                判断题
+                                            </option>
+                                            <option value="填空题">
+                                                填空题
+                                            </option>
+                                            <option value="简答题">
+                                                简答题
+                                            </option>
+                                            <option value="文件上传题">
+                                                文件上传题
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-lg-offset-2 col-sm-6 col-sm-offset-2">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="search" class="form-control" name="search" placeholder="科目" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-success btn-block">
+                                                    <i class="fa fa-search fa-lg">
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                            <form action="{:U('Exam/paperDetail')}" method="post">
+                             <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="question-list">
+                                        <!--qid 题目id ，subid 科目id-->
+                                        <input type="hidden" name="pId" value="{$pId}">
+                                        <div class="question" qid="" subid="">
+                                            <div class="details">
+                                                 <volist name="list1" id="vo">
+                                                 <div class="content">
+                                                    <div class="quetion-title" style="margin-top:10px;">
+                                                        <div class="row">
+                                                            <div class="col-sm-7" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                                                                题目：{$vo['qutitle']}
+                                                            </div>
+	                                                    <div class="col-sm-1 col-sm-offset-4">
+	                                                        <input type="checkbox" class="checkbox" name="condition[]" value="{$vo['anid']}&{$vo['qutype']}" />
+	                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="meta" data-score="1">
+                                                        <span class="qt">
+                                                            类型：{$vo['qutype']}
+                                                        </span>
+                                                     <!--    <span class="sub" style="float: right;">
+                                                               时间：{$vo['qudate']}
+                                                        </span> -->
+                                                        <span class="author" style="float: right;">
+                                                              科目：{$vo['cname']}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                 </volist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 30%;margin:0px auto">
+                            	 <button class="btn btn-success btn-block" type="submit">
+                                添 加
+                                </button>
+                            </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+		<!--未选中删除项提示-->
+		<div class="modal fade" id="notselect" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">温馨提示</h4>
+					</div>
+					<div class="modal-body">
+						请先选择一项
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">好的</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/SCEditor/minified/jquery.sceditor.bbcode.min.js" type="text/javascript"></script>
+		<script src="__PUBLIC__/teacher/js/Control.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("textarea").sceditor({
+				plugins: 'bbcode',
+				height: '150px',
+				width: '100%',
+				resizeEnabled: false,
+				toolbar: 'bold,italic,underline,strike,color,left,center,right,justify,font,size,table,bulletlist,orederedlist,link,subscript,superscript,image,code,date,time,maximize',
+				style: "minified/jquery.sceditor.default.min.css"
+			});
+		</script>
+	</body>
+  <script type="text/javascript">
+    	$(function(){
+    		var cName = "{$quType}";
+    		//alert(cName);
+    		 $('#option1').change(function(){
+    		 	 $('#form1').submit();
+    		 });
+    		  var option2 = $('#option1').find('option');
+    	 	  var count2 = option1.length;
+    	 	  for(var i=0;i<count2;i++){
+                   if(option1[i].value === cName){
+                        option1[i].setAttribute('selected','selected');
+                        break;
+                   }
+    	 	  }
+    	});
+	    function del(){
+	        return confirm("你确定删除吗？");
+	    }
+        $(function(){
+        	 $('#tbList').find('a[href="#"]').each(function(){
+                   var that1 = $(this);
+                   that1.click(function(){
+                       var span1 = that1.parents('tr').find('span');
+                       var input1 = that1.parents('tr').find('input[type="text"]');
+                       span1.hide();
+                       input1.show(),val(span1.text());
+                   })
+        	 });
+        	  $('#tbList').find('input[type="text"]').each(function(){
+                   var that2 = $(this);
+                   var url1 = "{:U('Exam/setScore')}";
+                   that2.blur(function(){
+
+                        var quId1 = that2.parents('tr').attr('quId');
+                        var quType1 = that2.parents('tr').attr('quType');
+                        var span1 = that2.parents('tr').find('span');
+                        var input1 = that2.parents('tr').find('input[type="text"]');
+                       if(that2.val() !== ""){
+                           $.post(url1,
+                           	{score:that2.val(),quId:quId1,quType:quType1}
+                           	,function(data){
+                                if(data === "ok"){
+	                              span1.show().text(that2.val());
+	                              input1.hide(),val('');
+                                }
+                           })
+                       }
+                   })
+        	 });
+        	// $count1 = count($list);
+
+        });
+    </script>
+</html>

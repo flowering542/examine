@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>批改试卷</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.css" />
+		<link rel="stylesheet" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<style type="text/css">
+			textarea {
+				resize: none;
+			}
+			
+			.score {
+				width: 100px;
+			}
+		</style>
+	</head>
+
+ <body>
+		<div class="container-fluid">
+			<div class="page-header" style="margin-top: 0px;">
+				<h3 style="margin-top: 5px;">试卷管理<small>批改试卷</small></h3>
+			</div>
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h4>批改</h4>
+				</div>
+				<div class="panel-body" style="padding-bottom: 0px;">
+						<!--问答题-->
+						<notempty name="list1">
+                        <div class="panel panel-success">
+							<div class="panel-heading">
+								问答题
+							</div>
+							<volist name="list1" id="vo">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<h5>题目</h5>
+											<textarea readonly="readonly" rows="5" class="form-control">{$vo['qutitle']}</textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<h5>答案</h5>
+											<textarea readonly="readonly" rows="3" class="form-control">{$vo['answer']}</textarea>
+										</div>
+									</div>
+									<div class="row">
+										 <div class="col-sm-2" style="width: 90px;">
+										 	 	<h5>总分</h5>
+												<input type="text" class="form-control" value="{$vo['score']}" readonly="readonly" />
+										 </div>
+										 <div class="col-sm-4">
+											 <div class="score" tId={$vo['tid']} sId={$vo['sid']} pId={$vo['pid']} type={$vo['type']}>
+												<h5>得分</h5>
+												<input type="number" class="form-control"  placeholder="输入得分"/>
+											</div>
+										 </div>
+									</div>
+							     </div>
+							</volist>
+						</div>
+						</notempty>
+						<!--文件上传题-->
+						<notempty name="list2">
+                        <div class="panel panel-success">
+							<div class="panel-heading">
+								文件上传题
+							</div>
+							<volist name="list2" id="vo">
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<h5>题目</h5>
+											<textarea readonly="readonly" class="form-control">{$vo['qutitle']}</textarea>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+											<h5>答案</h5>
+											<a href="__PUBLIC__{$vo['answer']}" class="btn btn-success btn-block">下载答案文件</a>
+										</div>
+									</div>
+									<div class="row">
+										 <div class="col-sm-2" style="width: 90px;">
+										 	 	<h5>总分</h5>
+												<input type="text" class="form-control" value="{$vo['score']}" readonly="readonly" />
+										 </div>
+										 <div class="col-sm-4">
+											<div class="score" tId={$vo['tid']} sId={$vo['sid']} pId={$vo['pid']} type={$vo['type']}>
+												<h5>得分</h5>
+												<input type="number" class="form-control" placeholder="输入得分"/>
+									       </div>
+										 </div>
+									</div>
+								</div>
+                            </volist>
+                        </div>
+				       </notempty>
+				</div>
+				<div class="form-group" style="padding-left: 15px;">
+					<a href="{:U('Exam/waitExam')}" class="btn btn-success">批卷完成</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+    	  $(function(){
+    	  	   var url1 = "{:U('Exam/updateScore')}";
+    	  	   $('[type=number]').each(function(index, el) {
+    	  	   	        var this1 = $(this);
+    	  	   	        this1.change(function(){
+    	  	   	        	 var parent1 = this1.parent();
+    	  	   	        	 var tId1 = parent1.attr('tId');
+    	  	   	        	 var pId1 = parent1.attr('pId');
+    	  	   	        	 var sId1 = parent1.attr('sId');
+    	  	   	        	 var type1 = parent1.attr('type');
+    	  	   	        	 $.post(url1,{tId:tId1,pId:pId1,sId:sId1,type:type1,score:$(this).val()},
+    	  	   	        	 function(data){
+    	  	   	        	 	   console.log(data);
+    	  	   	        	 });
+    	  	   	        });
+    	  	   });
+    	  });
+    </script>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Online Test</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/font-awesome.css" />
+		<link rel="shortcut icon" href="__PUBLIC__/teacher/images/logo.png">
+		<style type="text/css">
+			#sidebar a {
+				color: #777;
+			}
+			#sidebar a:hover,
+			#sidebar a:active,
+			#sidebar a:focus{
+				color: #1abc9c;
+			}
+			@media (max-width: 767px) {
+				#sidebar {
+					display: none;
+				}
+				.listitem {
+					display: block !important;
+				}
+			}
+			
+			@media (min-width: 768px) and (max-width: 991px) {
+				#sidebar {
+					display: block;
+				}
+				#sidebar li {
+					border-top: 1px solid white;
+					border-bottom: 1px solid white;
+				}
+				#sidebar li:first-child {
+					border-top: none;
+				}
+				#sidebar a {
+					font-size: 16px;
+					font-weight: 700;
+				}
+				.listitem {
+					display: none !important;
+				}
+			}
+			
+			@media (max-width: 1199px) and (min-width: 992px) {
+				#sidebar {
+					display: block;
+				}
+				#sidebar li {
+					border-top: 1px solid white;
+					border-bottom: 1px solid white;
+				}
+				#sidebar li:first-child {
+					border-top: none;
+				}
+				#sidebar a {
+					font-size: 16px;
+					font-weight: 700;
+				}
+				.listitem {
+					display: none !important;
+				}
+			}
+			
+			@media (min-width: 1200px) {
+				#sidebar {
+					display: block;
+					font-weight: 700;
+				}
+				#sidebar li {
+					border-top: 1px solid white;
+					border-bottom: 1px solid white;
+				}
+				#sidebar li:first-child {
+					border-top: none;
+				}
+				#sidebar a {
+					font-size: 16px;
+				}
+				.listitem {
+					display: none !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!--顶部导航-->
+		<nav class="navbar navbar-default" style="margin-bottom: 3px;">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				    </button>
+					<a class="navbar-brand" href="#">
+					<img src="__PUBLIC__/teacher/images/logo.png" width="35" height="30" style="display: inline-block;vertical-align: top;"/>
+					Online Test
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="listitem">
+							<a href="{:U('Teacher/dashboard')}" target="myFrame">控制中心</a>
+						</li>
+						<li class="listitem">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">试卷管理<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{:U('Exam/setExam')}" target="myFrame">新建试卷</a>
+								</li>  
+								<li>
+									<a href="{:U('Exam/waitExam')}" target="myFrame">待批改试卷</a>
+								</li>
+								<li>
+									<a href="{:U('Exam/examList')}" target="myFrame">试卷列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="listitem">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">题库管理<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{:U('Teacher/addSingle')}" target="myFrame">添加试题</a>
+								</li>
+								<li>
+									<a href="{:U('Teacher/questionList')}" target="myFrame">题库列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="listitem">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">成绩管理<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{:U('Exam/grade')}" target="myFrame">查看成绩</a>
+								</li>
+								<li>
+									<a href="{:U('Exam/gradeList2')}" target="myFrame">成绩分析</a>
+								</li>
+							</ul>
+						</li>
+						<li class="listitem dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">公告管理<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{:U('Teacher/announce')}" target="myFrame">发布公告</a>
+								</li>
+								<li>
+									<a href="{:U('Teacher/messageList')}" target="myFrame">公告列表</a>
+								</li>
+							</ul>
+						</li>
+						<li class="listitem">
+							<a href="{:U('Exam/lan')}" target="myFrame">局域网部署</a>
+						</li>
+						<li class="dropdown" id="drop">
+							<a href="#">你好，{$tName|default="老师"}&nbsp;<span class="fa fa-gear"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="{:U('Teacher/personal')}" target="myFrame">
+									<i class="fa fa-user"></i>&nbsp;个人中心</a>
+								</li>
+									<li role="separator" class="divider"></li>
+								<li>
+									<a href="{:U('Teacher/modifyPwd')}" target="myFrame">
+									<i class="fa fa-edit"></i>&nbsp;修改密码</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a href="{:U('Index/login_out')}"><i class="fa fa-sign-out"></i>&nbsp;退出登录</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+		<div class="container-fluid>
+			<div class="row">
+				<!--响应式侧边栏-->
+				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" style="padding: 0">
+					<div class="navbar navbar-default" id="sidebar">
+						<ul class="nav">
+							<li>
+								<a href="{:U('Teacher/dashboard')}" target="myFrame"><i class="fa fa-home fa-lg">&nbsp;</i>控制中心</a>
+							</li>
+							<li>
+								<a href="#" data-toggle="collapse" data-target="#exam-options" aria-expanded="false" aria-controls="exam-options"><i class="fa fa-check-circle-o fa-lg"></i>&nbsp;试卷管理<b class="fa fa-chevron-circle-right"></b></a>
+								<div class="collapse list-group" id="exam-options">
+									<a href="{:U('Exam/setExam')}" target="myFrame" class="list-group-item">新建试卷</a>
+									<a href="{:U('Exam/waitExam')}" target="myFrame" class="list-group-item">待批改试卷</a>
+									<a href="{:U('Exam/examList')}" target="myFrame" class="list-group-item">试卷列表</a>
+								</div>
+							</li>
+							<li>
+								<a href="#" data-toggle="collapse" data-target="#questions-options" aria-expanded="false" aria-controls="questions-options"><i class="fa fa-question-circle-o fa-lg"></i>&nbsp;题库管理<b class="fa fa-chevron-circle-right"></b></a>
+								<div class="collapse list-group" id="questions-options">
+									<a href="{:U('Teacher/addSingle')}" target="myFrame" class="list-group-item">添加试题</a>
+									<a href="{:U('Teacher/questionList')}" target="myFrame" class="list-group-item">题库列表</a>
+								</div>
+							</li>
+							<li>
+								<a href="#" data-toggle="collapse" data-target="#grade" aria-expanded="false" aria-controls="grade"><i class="fa fa-line-chart"></i>&nbsp;成绩管理<b class="fa fa-chevron-circle-right"></b></a>
+								<div class="collapse list-group" id="grade">
+									<a href="{:U('Exam/grade')}" target="myFrame" class="list-group-item">查看成绩</a>
+									<a href="{:U('Exam/gradeList2')}" target="myFrame" class="list-group-item">成绩分析</a>
+								</div>
+							</li>
+							<li>
+								<a href="#" data-toggle="collapse" data-target="#announce-options" aria-expanded="false" aria-controls="announce-options"><i class="fa fa-envelope-open-o"></i>&nbsp;公告管理<b class="fa fa-chevron-circle-right"></b></a>
+								<div class="collapse list-group" id="announce-options">
+									<a href="{:U('Teacher/announce')}" target="myFrame" class="list-group-item">发布公告</a>
+									<a href="{:U('Teacher/messageList')}" target="myFrame" class="list-group-item">公告列表</a>
+								</div>
+							</li>
+							<li>
+								<a href="{:U('Exam/lan')}" target="myFrame"><i class="fa fa-superpowers fa-lg"></i>局域网部署</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--iframe-->
+				<div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
+					<div>
+						<iframe name="myFrame" src="{:U('Teacher/dashboard')}" frameborder="0" width="100%" height="100%" id="iframepage"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js"></script>
+	</body>
+    <script type="text/javascript">
+    	 $(function (){
+	        var hei=$(window).height()*1-80;
+	        $("#iframepage").css("height",hei);
+	        $("#sidebar").css("height",hei);
+	        $(window).resize(function (){ // 监听浏览器窗口高度变化
+	            var hei=$(window).height()*1-80;
+	            $("#iframepage").css("height",hei);
+	            $("#sidebar").css("height",hei);
+        })
+    });
+    $(function(){
+    	 $('#drop').mouseenter(function(){
+    	 	  $('#drop .dropdown-menu').show();
+    	 });
+    	  $('#drop').mouseleave(function(){
+    	 	$('#drop .dropdown-menu').hide();
+    	 });
+    });
+    </script>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>
+            考试码输入
+        </title>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/flat-ui.css" />
+        <link rel="shortcut icon" href="__PUBLIC__/student/images/logo.png">
+        <style type="text/css">
+               .err{border: 1px solid #d9d9d9;margin-top: 75px;box-shadow: 1px 2px 1px #d9d9d9;border-radius: 3px;font-size: 14px;display: none;}
+        </style>
+    </head>
+    
+    <body>
+        <nav class="nav navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">
+                            Toggle navigation
+                        </span>
+                        <span class="icon-bar">
+                        </span>
+                        <span class="icon-bar">
+                        </span>
+                        <span class="icon-bar">
+                        </span>
+                    </button>
+                    <a href="#" class="navbar-brand">
+                        Online Test
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{:U('Student/studentMessage')}">
+                                个人信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{:U('Student/testGrade')}">
+                                成绩查询
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{:U('Student/index')}">
+                                在线考试
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                                Emine
+                                <span class="navbar-unread">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">
+                                        我的消息
+                                    </a>
+                                </li>
+                                <li role="separator" class="divider">
+                                </li>
+                                <li>
+                                    <a href="{:U('Index/login_out')}">
+                                        退出登录
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </nav>
+        <article class="container">
+            <div class=" text-center text-primary col-xs-12 col-md-8 col-md-offset-2 logo">
+                </br>
+                </br>
+            </div>
+            <div class="container ">
+                <div class="row ">
+                    <div class="panel panel-default text-center col-lg-4 col-md-6 col-sm-8 col-xs-10 col-lg-offset-4 col-md-offset-3 col-sm-offset-2 col-xs-offset-1">
+                        <h3 class="panel-heading">
+                            考试码输入
+                        </h3>
+                        <form onsubmit="return false" class="form panel-body">
+                            <div class="input-group myInputGroup" style="margin-bottom:20px">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-barcode ">
+                                    </span>
+                                </span>
+                                <input type="text" class="form-control" required="required" name="pCode"
+                                id="pCode" placeholder="请输入考试码" />
+                                <input type="hidden" name="pId" id="pId" value="">
+                                <input type="hidden" name="sId" id="sId" value="">
+                            </div>
+                            <button type="button" class="btn btn-default col-md-12 col-sm-12 col-xs-12" onclick="return mit();">
+                                <a href="#" style="color:white;">
+                                    进入考试
+                                </a>
+                            </button>
+                            <div class="err">
+                              <span id="err">请输入1---6位的考试访问码</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <footer>
+        </footer>
+        <script src="__PUBLIC__/student/js/jquery-3.2.1.min.js">
+        </script>
+        <script src="__PUBLIC__/student/js/bootstrap.min.js" />
+        </script>
+    </body>
+    <script type="text/javascript">
+          var url1 = "{:U('Student/testCode')}";
+          var arr = true;
+          $(function(){
+              $('#pCode').blur(function(){
+                   var that1 = $(this);
+                   if(that1.val().length === 0 || that1.val().length>6){
+                       $('.err').show();
+                       $('#err').show().text("请输入1---6位的考试访问码！");
+                         arr = false;
+                   }
+                   else{
+                       $('#err').hide().text("");
+                         arr = true;
+                   }
+
+              })
+          });
+         function mit(){
+              var count1 = $('#pCode').val();
+              //alert(count1.length);
+              if(count1.length === 0 || count1.length>6){
+                    $('.err').show();
+                    $('#err').show().text("请输入1---6位的考试访问码！");
+                    return false;
+              }
+              else{
+                   $('.err').hide();
+                   $('#err').hide().text("");
+                   $.post(url1,{pCode:count1},function(data){
+                   // alert(data['info']);
+                          if(data['info'] === "no"){
+                             $('.err').show();
+                             $('#err').show().text("请重新输入，考试访问码不存在！");
+                             return false;
+                          }
+                          else if(data['info'] === "end"){
+                             alert("该考试已经结束...");
+                             return false;
+                          }
+                          else if(data['info'] === "noOne"){
+                             alert("考试还没开始，请稍等...");
+                             return false;
+                          }
+                          else if(data['info'] === "noTwo"){ //第一次进入考试
+                              var t = confirm("确定进入考试吗！");
+                               if(t){
+                                $('#pId').val(data['res']);
+                                 document.location.href ="./testing?pId="+data['res'];
+                                 return false;
+                               }
+                          }
+                          else if(data['info'] === "three"){
+                               var t = confirm("确定再进入考试吗！");
+                                if(t){
+                                   //console.log(data['res']['sId']);
+                                    $('#pId').val(data['res']['pId']);
+                                   $('#sId').val(data['res']['sId']);
+                                   //$('form').submit();
+                                   document.location.href ="./testing?pId="+data['res']['pId']+"&sId=yes";
+                                    return false;
+                                 }
+                               
+                          }
+                          else{
+                                alert("该考试已经结束..");
+                          }
+                   })
+
+              }
+          }
+    </script>
+</html>

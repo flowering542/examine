@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>手动添加题目到题库</title>
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__/teacher/SCEditor/minified/themes/default.min.css" />
+	</head>
+	<body>
+		<div class="container-fluid">
+			
+				<div class="page-header" style="margin-top: 0">
+					<h3 style="margin-top:10px;">题库管理<small>管理试题</small></h3>
+				</div>
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h4><i class="fa fa-gift"></i>&nbsp;新增试题</h4>
+					</div>
+					<div class="panel-body">
+						<ul class="nav navbar nav-tabs" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#single" aria-controls="single" role="tab" data-toggle="tab">单选题</a>
+							</li>
+							<li role="presentation">
+								<a href="#multiple" aria-controls="multiple" role="tab" data-toggle="tab">多选题</a>
+							</li>
+							<li role="presentation">
+								<a href="#judge" aria-controls="judge" role="tab" data-toggle="tab">判断题</a>
+							</li>
+							<li role="presentation">
+								<a href="#completion" aria-controls="comletion" role="tab" data-toggle="tab">填空题</a>
+							</li>
+							<li role="presentation">
+								<a href="#essay_questions" aria-controls="easy_questions" role="tab" data-toggle="tab">问答题</a>
+							</li>
+							<li role="presentation">
+								<a href="#upload" aria-controls="upload" role="tab" data-toggle="tab">文件上传题</a>
+							</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<!--单选-->
+							<div role="tabpanel" class="tab-pane active" id="single" >
+								<form action="{:U('Teacher/addSingle')}"  method="post" class="form">
+									<div class="form-group">
+										<h4>试题</h4>
+										<textarea class="single1" name="sTitle"></textarea>
+									</div>
+									<div class="form-group">
+										<h4>答案选项</h4>
+									</div>
+									<div class="form-group">
+										<h6>(A)</h6>
+										<textarea class="single1" name="sA"></textarea>
+									</div>
+									<div class="form-group">
+										<h6>(B)</h6>
+										<textarea class="single1" name="sB"></textarea>
+									</div>
+									<div class="form-group">
+										<h6>(C)</h6>
+										<textarea class="single1" name="sC"></textarea>
+									</div>
+									<div class="form-group">
+										<h6>(D)</h6>
+										<textarea class="single1" name="sD"></textarea>
+									</div>
+									<div class="form-group">
+									<div class="row">
+									   	    <div class="col-sm-8">
+									   	    	<h6>正确选项</h6>
+													<select name="sTrue" class="form-control" id="option1">
+														<option value="A">A</option>
+														<option value="B">B</option>
+														<option value="C">C</option>
+														<option value="D">D</option>
+													</select>
+									   	    </div>
+									   </div>	
+									</div>
+									<div class="form-group">
+									   <div class="row">
+									   	    <div class="col-sm-6">
+									   	    	<h6>科目</h6> 
+												<select name="cName" class="form-control" id="option2">
+												    <volist name="list" id="vo">
+												    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+												    </volist>
+												</select>
+									   	    </div>
+									   </div>									
+									</div>
+									<div class="form-group">
+										<h6>分数</h6>
+										<input type="number" class="form-control" name="score" style="width:300px;" required="required" value="2" />
+									</div>
+									<button type="submit" class="btn btn-success" style="width:150px;" >保存</button>
+								</form>
+							</div>
+							<!--多选-->
+						<div role="tabpanel" class="tab-pane" id="multiple">
+		                   	<form action="{:U('Teacher/addMulti')}" method="post" class="form">
+								<div class="form-group">
+									<h4>试题</h4>
+									<textarea name="mTitle"></textarea>
+								</div>
+								<div class="form-group">
+									<h4>答案选项</h4>
+								</div>
+								<div class="form-group">
+									<h6>(A)</h6>
+									<textarea name="mA"></textarea>
+								</div>
+								<div class="form-group">
+									<h6>(B)</h6>
+									<textarea name="mB"></textarea>
+								</div>
+								<div class="form-group">
+									<h6>(C)</h6>
+									<textarea name="mC"></textarea>
+								</div>
+								<div class="form-group">
+									<h6>(D)</h6>
+									<textarea name="mD"></textarea>
+								</div>
+									<div class="form-group" id="option1">
+									<span>正确选项：</span>
+									<span><input type="checkbox" name="mT[]" value="A" />A</span>&nbsp;
+									<span><input type="checkbox" name="mT[]" value="B" />B</span>&nbsp;
+									<span><input type="checkbox" name="mT[]" value="C" />C</span>&nbsp;
+									<span><input type="checkbox" name="mT[]" value="D" />D</span>&nbsp;
+								</div>
+								<div class="form-group">
+								   <div class="row">
+								   	    <div class="col-sm-6">
+								   	    	<h6>科目</h6>
+											<select name="cName" class="form-control" id="option2">
+												  <volist name="list" id="vo">
+											    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+											     </volist>
+											</select>
+								   	    </div>
+								   </div>									
+								</div>
+								<div class="form-group">
+									<h6>分数</h6>
+									<input type="number" class="form-control" name="score" id="" value="2" style="width:300px;" />
+								</div>
+								<button type="submit" class="btn btn-success" data-dismiss="modal" style="width:150px;" >保存</button>
+							</form>
+						</div>
+					<div role="tabpanel" class="tab-pane" id="judge">
+						<form action="{:U('Teacher/addJudge')}" method="post" class="form">
+							<div class="form-group">
+								<h4>试题</h4>
+								<textarea name="jTitle"></textarea>
+							</div>
+							<div class="form-group" id="option1">
+								<span>正确答案：</span>
+								<span><input type="radio" name="jTrue" value="1" checked="checked" />真</span>&nbsp;
+								<span><input type="radio" name="jTrue" value="0"/>假</span>
+							</div>
+								<div class="form-group">
+							   <div class="row">
+							   	    <div class="col-sm-6">
+							   	    	<h6>科目</h6>
+										<select name="cName" class="form-control" id="option2">
+											  <volist name="list" id="vo">
+										    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+										      </volist>
+										</select>
+							   	    </div>
+							   </div>									
+							</div>
+							<div class="form-group">
+								<h6>分数</h6>
+								<input type="number" class="form-control" name="score"  value="2" style="width: 300px;" />
+							</div>
+							<button type="submit" class="btn btn-success" data-dismiss="modal" style="width: 150px;">保存</button>
+						</form>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="completion">
+						<form action="{:U('Teacher/addBlank')}" method="post" class="form">
+							<div class="form-group">
+								<h4>试题</h4>
+								<textarea name="bTitle"></textarea>
+							</div>
+							<div class="form-group">
+								<h5>正确答案</h5>
+							</div>
+							<div class="form-group">					
+							     <input type="text" class="form-control" name="bTrue" />
+							</div>
+							<div class="form-group">
+								<h6>科目</h6>
+								<select name="cName" class="form-control" id="option2">
+									       <volist name="list" id="vo">
+										    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+										    </volist>
+								</select>
+							</div>
+							<div class="form-group">
+								<h6>分数</h6>
+								<input type="number" class="form-control" name="score" id=""  style="width: 300px;" value="2"/>
+							</div>
+							<button type="submit" class="btn btn-success" data-dismiss="modal" style="width: 150px;">保存</button>
+						</form>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="essay_questions">
+						<form action="{:U('Teacher/addQu')}" method="post" class="form">
+						<div class="form-group">
+							<h4>试题</h4>
+							<textarea name="qTitle"></textarea>
+						</div>
+						<div class="form-group">
+							<h4>参考答案</h4>
+							<textarea name="qTrue"></textarea>
+						</div>
+						<div class="form-group">
+						   <div class="row">
+						   	    <div class="col-sm-6">
+						   	    	<h6>科目</h6>
+									<select name="cName" class="form-control" id="option2">
+										  <volist name="list" id="vo">
+									    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+									    </volist>
+									</select>
+						   	    </div>
+						   </div>									
+						</div>
+						<div class="form-group">
+							<h6>分数</h6>
+							<input type="number" class="form-control" name="score" id="" value="15" style="width: 300px;" />
+						</div>
+						<button type="submit" class="btn btn-success" data-dismiss="modal" style="width: 150px;">保存</button>
+					</form>
+					</div>
+						<div role="tabpanel" class="tab-pane" id="upload">
+							  <form action="{:U('Teacher/addFile')}" method="post"  enctype="multipart/form-data" class="form">
+								<div class="form-group">
+									<h4>试题</h4>
+									<textarea required="required" name="fTitle"></textarea>
+								</div>
+								<div class="form-group">
+									<h6>上传文件</h6>
+									<input type="file" name="myFile" required="required"/>
+								</div>
+								<div class="form-group">
+								   <div class="row">
+								   	    <div class="col-sm-6">
+								   	    	<h6>科目</h6>
+											<select name="cName" class="form-control" id="option2">
+												  <volist name="list" id="vo">
+											    	 <option value="{$vo['cname']}">{$vo['cname']}</option>
+											    </volist>
+											</select>
+								   	    </div>
+								   </div>									
+								</div>
+								<div class="form-group">
+									<h6>分数</h6>
+									<input type="number" class="form-control" name="score" id="" value="15" required="required" style="width: 300px;" />
+								</div>
+								<button type="submit" class="btn btn-success" data-dismiss="modal" style="width: 150px;">保存</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<script src="__PUBLIC__/teacher/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/teacher/SCEditor/minified/jquery.sceditor.bbcode.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("textarea").sceditor({
+				plugins: 'bbcode',
+				height: '150px',
+				width: '100%',
+				resizeEnabled: false,
+				toolbar: 'bold,italic,underline,strike,color,left,center,right,justify,font,size,table,bulletlist,orederedlist,link,subscript,superscript,image,code,date,time,maximize',
+				style: "minified/jquery.sceditor.default.min.css"
+			});
+		</script>
+	</body>
+
+</html>

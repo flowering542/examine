@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+            考试中...
+        </title>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/flat-ui.css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/student/css/test.css" />
+        <link rel="shortcut icon" href="__PUBLIC__/student/images/logo.png">
+        <style type="text/css">
+            #s p{margin-bottom: 0px;}
+            #m p{margin-bottom: 0px;}
+            #j p{margin-bottom: 0px;}
+            #f p{margin-bottom: 0px;word-wrap: break-word;overflow: hidden;text-indent: 2em;}
+            .download{margin:10px 0 10px 30px;}
+            .exampleInputFile{margin:10px 0 10px 30px;display: inline-block;}
+            #f input{display: inline-block;}
+        </style>
+    </head>
+    <script type="text/javascript">
+        
+    </script>
+    <body>
+        <!-- /.模态框-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">
+                                &times;
+                            </span>
+                        </button>
+                        <h4 class="modal-title">
+                            确定交卷？
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            当前共有<span id="total"></span>道题，已做<span id="yz"></span>道，未做<span id="mz"></span>道
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{:U('Student/index')}">
+                            <button type="button" class="btn btn-danger" id="ensure">
+                                确定交卷
+                            </button>
+                        </a>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                            再检查一下
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <div class="container">
+            <!-- 顶部 -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>
+                        {$pName}
+                        <button type="button" class="btn btn-info" id="submit" data-toggle="modal"
+                        data-target="#myModal">
+                            交卷
+                        </button>
+                    </h3>
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    </hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12">
+                            <!-- 计时器 -->
+                            <div id="timer">
+                                <span class="label label-danger" id="timercontrol">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12" id="control">
+                            <!-- 试题翻页 -->
+                            <div id="item">
+                                <ul class=" nav nav-tabs">
+                                    <li role="presentation" class="active">
+                                        <a href="#" aria-controls="a" role="tab" data-toggle="tab" id="btn1">
+                                            一
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#" aria-controls="b" role="tab" data-toggle="tab" id="btn2">
+                                            二
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#" aria-controls="c" role="tab" data-toggle="tab" id="btn3">
+                                            三
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#" aria-controls="d" role="tab" data-toggle="tab" id="btn4">
+                                            四
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#" aria-controls="e" role="tab" data-toggle="tab" id="btn5">
+                                            五
+                                        </a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#" aria-controls="f" role="tab" data-toggle="tab" id="btn6">
+                                            六
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- 按钮组1 -->
+                            <div class="btn-group" role="group" aria-label="q-s" id="button1">
+                                <for start="0" end="$qNum['s']">
+                                  <button type="button" class="btn btn-default" id="ds{$i}">
+                                    <a href="#s{$i}">
+                                        {$i+1}
+                                    </a>
+                                </button>
+                                </for>
+                            </div>
+                            <!-- 按钮组2 -->
+                            <div class="btn-group" role="group" aria-label="q-m" id="button2">
+                               <for start="0" end="$qNum['m']">
+                                  <button type="button" class="btn btn-default" id="dm{$i}">
+                                    <a href="#m{$i}">
+                                        {$i+1}
+                                    </a>
+                                </button>
+                                </for>
+                            </div>
+                            <!-- 按钮组3 -->
+                            <div class="btn-group" role="group" aria-label="q-j" id="button3">
+                             <for start="0" end="$qNum['j']">
+                                  <button type="button" class="btn btn-default" id="dj{$i}">
+                                    <a href="#j{$i}">
+                                        {$i+1}
+                                    </a>
+                                </button>
+                                </for>
+                            </div>
+                            <!-- 按钮组4 -->
+                            <div class="btn-group" role="group" aria-label="q-b" id="button4">
+                              <for start="0" end="$qNum['b']">
+                                  <button type="button" class="btn btn-default" id="db{$i}">
+                                    <a href="#b{$i}">
+                                        {$i+1}
+                                    </a>
+                                </button>
+                                </for>
+                            </div>
+                            <!-- 按钮组5 -->
+                            <div class="btn-group" role="group" aria-label="q-q" id="button5">
+                             <for start="0" end="$qNum['q']">
+                                  <button type="button" class="btn btn-default" id="dq{$i}">
+                                    <a href="#q{$i}">
+                                        {$i+1}
+                                    </a>
+                                </button>
+                                </for>
+                            </div>
+                            <!-- 按钮组6 -->
+                            <div class="btn-group" role="group" aria-label="q-f" id="button6">
+                             <for start="0" end="$qNum['f']">
+                                  <button type="button" class="btn btn-default" id="df{$i}">
+                                    <a href="#f{$i}">
+                                        {$i+1}
+                                    </a>
+                                </button>
+                                </for>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade" id="s">
+                            <div class="alert alert-success" role="alert">
+                                  单选题
+                            </div>
+                            <foreach name="single" item="vo" key="i">
+                             <div class="piece">
+                                <div class="clearfix">
+                                    <a id="s{$i}">
+                                        <h2 class="number">
+                                            第{$i+1}题
+                                        </h2>
+                                    </a>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" tId="{$vo['tid']}" sTrue="{$vo['strue']}" score="{$vo['score']}" type="{$vo['type']}">
+                                        <strong>
+                                            {$vo['stitle']}:
+                                        </strong>
+                                        <if condition="$vo['tid'] eq $list1[$i]['tid']">
+                                             <p>
+                                            <label>
+                                                <input name="s{$i}" type="radio" value="A" {:check1radio4($list1[$i]['answer'])}/>
+                                                A.{$vo['sa']}
+                                            </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input name="s{$i}" type="radio" value="B" {:check2radio4($list1[$i]['answer'])}/>
+                                                    B.{$vo['sb']}
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input name="s{$i}" type="radio" value="C" {:check3radio4($list1[$i]['answer'])} />
+                                                    C.{$vo['sc']}
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input name="s{$i}" type="radio" value="D" {:check4radio4($list1[$i]['answer'])}/>
+                                                    D.{$vo['sd']}
+                                                </label>
+                                            </p>
+                                            <else/>
+                                            <for start="0" end="$qNum['s']" name="k">
+                                                <if condition="$vo['tid'] eq $list1[$k]['tid']">
+                                                <p>
+                                                <label>
+                                                    <input name="s{$i}" type="radio" value="A" {:check1radio4($list1[$k]['answer'])}/>
+                                                    A.{$vo['sa']}
+                                                </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input name="s{$i}" type="radio" value="B" {:check2radio4($list1[$k]['answer'])}/>
+                                                        B.{$vo['sb']}
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input name="s{$i}" type="radio" value="C" {:check3radio4($list1[$k]['answer'])} />
+                                                        C.{$vo['sc']}
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input name="s{$i}" type="radio" value="D" {:check4radio4($list1[$k]['answer'])}/>
+                                                        D.{$vo['sd']}
+                                                    </label>
+                                                </p>
+                                                     <php>break;</php>
+                                                     <else/>
+                                                      <if condition="$k+1 eq $qNum['s']">
+                                                               <p>
+                                                    <label>
+                                                        <input name="s{$i}" type="radio" value="A" />
+                                                        A.{$vo['sa']}
+                                                    </label>
+                                                    </p>
+                                                    <p>
+                                                        <label>
+                                                            <input name="s{$i}" type="radio" value="B"/>
+                                                            B.{$vo['sb']}
+                                                        </label>
+                                                    </p>
+                                                    <p>
+                                                        <label>
+                                                            <input name="s{$i}" type="radio" value="C" />
+                                                            C.{$vo['sc']}
+                                                        </label>
+                                                    </p>
+                                                    <p>
+                                                        <label>
+                                                            <input name="s{$i}" type="radio" value="D"/>
+                                                            D.{$vo['sd']}
+                                                        </label>
+                                                    </p>
+                                                     <php>break;</php>
+                                                      </if>
+                                                </if>
+                                            </for>
+                                         </if>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="m">
+                            <div class="alert alert-success" role="alert">
+                                多选题 
+                            </div>
+                            <foreach name="multi" item="vo" key="i">
+                             <div class="piece">
+                                <div class="clearfix">
+                                    <a id="m{$i}">
+                                        <h2 class="number">
+                                            第{$i+1}题
+                                        </h2>
+                                    </a>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" tId="{$vo['tid']}" sTrue="{$vo['mtrue']}" score="{$vo['score']}" type="{$vo['type']}">
+                                        <strong>
+                                            {$vo['mtitle']}:
+                                        </strong>
+                                        <if condition="$vo['tid'] eq $list2[$i]['tid']">
+                                              <p>
+                                            <label>
+                                                <input name="m{$i}[]" type="checkbox" value="A" {:checkA1($list2[$i]['answer'])}/>
+                                                A.{$vo['ma']}
+                                            </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input name="m{$i}[]" type="checkbox" value="B" {:checkB1($list2[$i]['answer'])}/>
+                                                    B.{$vo['mb']}
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input name="m{$i}[]" type="checkbox" value="C" {:checkC1($list2[$i]['answer'])}/>
+                                                    C.{$vo['mc']}
+                                                </label>
+                                            </p>
+                                            <p>
+                                                <label>
+                                                    <input name="m{$i}[]" type="checkbox" value="D" {:checkD1($list2[$i]['answer'])}/>
+                                                    D.{$vo['md']}
+                                                </label>
+                                            </p>
+                                            <else/>
+                                            <for start="0" end="$qNum['m']" name="k">
+                                            <if condition="$vo['tid'] eq $list2[$k]['tid']">
+                                                   <p>
+                                                <label>
+                                                    <input name="m{$i}[]" type="checkbox" value="A" {:checkA1($list2[$k]['answer'])}/>
+                                                    A.{$vo['ma']}
+                                                </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input name="m{$i}[]" type="checkbox" value="B" {:checkB1($list2[$k]['answer'])}/>
+                                                        B.{$vo['mb']}
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input name="m{$i}[]" type="checkbox" value="C" {:checkC1($list2[$k]['answer'])}/>
+                                                        C.{$vo['mc']}
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                        <input name="m{$i}[]" type="checkbox" value="D" {:checkD1($list2[$k]['answer'])}/>
+                                                        D.{$vo['md']}
+                                                    </label>
+                                                </p>    
+                                                 <php>break;</php>
+                                                 <else/>
+                                                      <if condition="$k+1 eq $qNum['m']">
+                                                        <p>
+                                                        <label>
+                                                            <input name="m{$i}[]" type="checkbox" value="A" />
+                                                            A.{$vo['ma']}
+                                                        </label>
+                                                        </p>
+                                                        <p>
+                                                            <label>
+                                                                <input name="m{$i}[]" type="checkbox" value="B" />
+                                                                B.{$vo['mb']}
+                                                            </label>
+                                                        </p>
+                                                        <p>
+                                                            <label>
+                                                                <input name="m{$i}[]" type="checkbox" value="C"/>
+                                                                C.{$vo['mc']}
+                                                            </label>
+                                                        </p>
+                                                        <p>
+                                                            <label>
+                                                                <input name="m{$i}[]" type="checkbox" value="D"/>
+                                                                D.{$vo['md']}
+                                                            </label>
+                                                        </p>
+                                                            <php>break;</php>
+                                                      </if>
+                                                </if>
+                                            </for>
+                                         </if>
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="b">
+                            <div class="alert alert-success" role="alert">
+                                填空题
+                            </div>
+                            <foreach name="blank" item="vo" key="i">
+                              <div class="piece">
+                                <div class="clearfix">
+                                    <a id="b{$i}">
+                                        <h2 class="number">
+                                            第{$i+1}题
+                                        </h2>
+                                    </a>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" tId="{$vo['tid']}" sTrue="{$vo['btrue']}" score="{$vo['score']}" type="{$vo['type']}">
+                                        <strong style="display: block;">
+                                        {$vo['btitle']}:
+                                        </strong>
+                                        <if condition="$vo['tid'] eq $list4[$i]['tid']">
+                                            <textarea cols="80" rows="1" name="b{$i}" style="font-size: 14px;">{$list4[$i]['answer']}</textarea>
+                                            <else/>
+                                            <for start="0" end="$qNum['b']" name="k">
+                                                <if condition="$vo['tid'] eq $list4[$k]['tid']">
+                                                     <textarea cols="80" rows="1" name="b{$i}" style="font-size: 14px;">{$list4[$k]['answer']}</textarea>
+                                                     <php>break;</php>
+                                                     <else/>
+                                                      <if condition="$k+1 eq $qNum['b']">
+                                                            <textarea cols="80" rows="1" name="b{$i}" style="font-size: 14px;"></textarea>
+                                                            <php>break;</php>
+                                                      </if>
+                                                </if>
+                                            </for>
+                                         </if>
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="j">
+                            <div class="alert alert-success" role="alert">
+                                 判断题
+                            </div>
+                            <foreach name="judge" item="vo" key="i">
+                                <div class="piece">
+                                <div class="clearfix">
+                                    <a id="j{$i}">
+                                        <h2 class="number">
+                                            第{$i+1}题
+                                        </h2>
+                                    </a>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body" tId="{$vo['tid']}" sTrue="{$vo['jtrue']}" score="{$vo['score']}" type="{$vo['type']}">
+                                        <strong>
+                                            {$vo['jtitle']}:
+                                        </strong>
+                                           <if condition="$vo['tid'] eq $list3[$i]['tid']">
+                                                 <p>
+                                                 <label>
+                                                    <input name="j{$i}" type="radio" value="1" {:check1radio2($list3[$i]['answer'])}/>
+                                                        正确
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                    <input name="j{$i}" type="radio" value="0" {:check2radio2($list3[$i]['answer'])}/>
+                                                        错误
+                                                    </label>
+                                                </p>
+                                            <else/>
+                                            <for start="0" end="$qNum['j']" name="k">
+                                            <if condition="$vo['tid'] eq $list3[$k]['tid']">
+                                                <p>
+                                                 <label>
+                                                    <input name="j{$i}" type="radio" value="1" {:check1radio2($list3[$k]['answer'])}/>
+                                                        正确
+                                                    </label>
+                                                </p>
+                                                <p>
+                                                    <label>
+                                                    <input name="j{$i}" type="radio" value="0" {:check2radio2($list3[$k]['answer'])}/>
+                                                        错误
+                                                    </label>
+                                                </p>
+                                                 <php>break;</php>
+                                                 <else/>
+                                                  <if condition="$k+1 eq $qNum['j']">
+                                                        <p>
+                                                         <label>
+                                                                <input name="j{$i}" type="radio" value="1" />
+                                                                正确
+                                                            </label>
+                                                        </p>
+                                                        <p>
+                                                            <label>
+                                                                <input name="j{$i}" type="radio" value="0" />
+                                                                错误
+                                                            </label>
+                                                        </p>
+                                                        <php>break;</php>
+                                                  </if>
+                                                </if>
+                                            </for>
+                                         </if>
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="q">
+                            <div class="alert alert-success" role="alert">
+                                简答题
+                            </div>
+                            <foreach name="question" item="vo" key="i">
+                             <div class="piece">
+                                <div class="clearfix">
+                                    <h2 class="number" id="q{$i}">
+                                        第{$i+1}题
+                                    </h2>
+                                </div>
+                                    <div class="panel panel-default">
+                                    <div class="panel-body" tId="{$vo['tid']}" sTrue="{$vo['qtrue']}" score="{$vo['score']}" type="{$vo['type']}">
+                                        <strong style="display: block;">
+                                        {$vo['qtitle']}:
+                                        </strong>
+                                        <if condition="$vo['tid'] eq $list5[$i]['tid']">
+                                            <textarea cols="95" rows="3" name="q{$i}" style="font-size: 14px;">{$list5[$i]['answer']}</textarea>
+                                            <else/>
+                                            <for start="0" end="$qNum['q']" name="k">
+                                                <if condition="$vo['tid'] eq $list5[$k]['tid']">
+                                                     <textarea cols="95" rows="3" name="q{$i}" style="font-size: 14px;">{$list5[$k]['answer']}</textarea>
+                                                     <php>break;</php>
+                                                     <else/>
+                                                      <if condition="$k+1 eq $qNum['q']">
+                                                            <textarea cols="95" rows="3" name="q{$i}" style="font-size: 14px;"></textarea>
+                                                            <php>break;</php>
+                                                      </if>
+                                                </if>
+                                           </for>
+                                         </if>
+                                    </div>
+                                </div>
+                            </div>
+                            </foreach>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="f">
+                            <div class="alert alert-success" role="alert">
+                                文件上传题
+                            </div>
+                             <foreach name="file" item="vo" key="i">
+                                <div class="piece">
+                                <div class="clearfix">
+                                    <h2 class="number" id="f{$i}">
+                                        第{$i+1}题
+                                    </h2>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <strong>题目描述:</strong>
+                                        <p>{$vo['ftitle']}</p>
+                                        <if condition="$vo['tid'] eq $list6[$i]['tid']">
+                                        <form class="form" action="{:U('Student/submitUpload')}" method="post" enctype="multipart/form-data">
+                                        <div class="form-group" id="holdfile">
+                                            <a href="__PUBLIC__{$vo['fpath']}" class="btn btn-success download">
+                                                <span class="glyphicon glyphicon-arrow-down">
+                                                </span>下载题目文件
+                                            </a>
+                                            <input type="hidden" name="tId" value="{$vo['tid']}">
+                                            <input type="hidden" name="type" value="{$vo['type']}">
+                                            <div id="delDiv{$i}" class="exampleInputFile" flag={$i}>
+                                                 <a href="javascript:void(0)" class="btn btn-primary" id="delBtn{$i}">
+                                                 <span class="glyphicon glyphicon-remove">
+                                                </span>删除重传</a>
+                                                 {:getfname($list6[$i]['answer'])}
+                                            </div>  
+                                            <input type="file" name="myFile" class="exampleInputFile" style="display: none;">
+                                            <input type="submit" value="提 交" style="display: none;">
+                                        </div>
+                                    </form>
+                                     <else/>
+                                            <for start="0" end="$qNum['f']" name="k">
+                                         <if condition="$vo['tid'] eq $list6[$k]['tid']">
+                                            <form class="form" action="{:U('Student/submitUpload')}" method="post" enctype="multipart/form-data">
+                                            <div class="form-group" id="holdfile">
+                                                <a href="__PUBLIC__{$vo['fpath']}" class="btn btn-success download">
+                                                    <span class="glyphicon glyphicon-arrow-down">
+                                                    </span>下载题目文件
+                                                </a>
+                                                <input type="hidden" name="tId" value="{$vo['tid']}">
+                                                <input type="hidden" name="type" value="{$vo['type']}">
+                                                <div id="delDiv{$i}" class="exampleInputFile" flag={$i}>
+                                                     <a href="javascript:void(0)" class="btn btn-primary" id="delBtn-{$i}">
+                                                     <span class="glyphicon glyphicon-remove">
+                                                    </span>删除重传</a>
+                                                     {:getfname($list6[$k]['answer'])}
+                                                </div>  
+                                                <input type="file" name="myFile" class="exampleInputFile" style="display: none;">
+                                                <input type="submit" value="提 交" style="display: none;">
+                                            </div>
+                                        </form>
+                                            <php>break;</php>
+                                             <else/>
+                                             <if condition="$k+1 eq $qNum['f']">
+                                                    <form class="form" action="{:U('Student/submitUpload')}" method="post" enctype="multipart/form-data">
+                                                    <div class="form-group" id="holdfile">
+                                                        <a href="__PUBLIC__{$vo['fpath']}" class="btn btn-success download">
+                                                            <span class="glyphicon glyphicon-arrow-down">
+                                                            </span>下载题目文件
+                                                        </a>
+                                                        <input type="hidden" name="tId" value="{$vo['tid']}">
+                                                        <input type="hidden" name="type" value="{$vo['type']}">
+                                                        <input type="file" name="myFile" class="exampleInputFile">
+                                                        <input type="submit" value="提 交">
+                                                    </div>
+                                                    </form> 
+                                                            <php>break;</php>
+                                                      </if>
+                                                </if>
+                                            </for>
+                                         </if>
+                                    </div>
+                                </div>
+                            </div>
+                             </foreach>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="__PUBLIC__/student/js/jquery-3.2.1.min.js">
+        </script>
+        <script src="__PUBLIC__/student/js/bootstrap.min.js" />
+        </script>
+    </body>
+<script type="text/javascript">
+     $(function(){
+          var q = [];
+          var total=0,mz=0,yz=0;
+          //总题数
+           q[0] = "{$qNum['s']}";
+           q[1] = "{$qNum['m']}";
+           q[3] = "{$qNum['b']}";
+           q[2] = "{$qNum['j']}";
+           q[4] = "{$qNum['q']}";
+           q[5] = "{$qNum['f']}";
+           $('#submit').click(function() {
+                 for(var i=0;i<6;i++){
+                    if(q[i] != ""){
+                      total +=q[i]*1;
+                    }
+               }
+              //选择题 
+               for(var i=0;i<q[0];i++){
+                   var s = $('#s').find('input[name="s'+i+'"]:checked').val();
+                   if(s != undefined) yz++;
+               }
+                for(var i=0;i<q[1];i++){
+                   var m = $('#m').find('input[name="m'+i+'[]"]:checked').val();
+                   if(m != undefined) yz++;
+               }
+                for(var i=0;i<q[2];i++){
+                   var j = $('#j').find('input[name="j'+i+'"]:checked').val();
+                   if(j != undefined) yz++;
+               }
+               for(var i=0;i<q[3];i++){
+                   var b = $('#b').find('textarea[name="b'+i+'"]').val();
+                      console.log(b+"adf");
+                   if(b != "") yz++;
+               }
+                for(var i=0;i<q[4];i++){
+                   var question1 = $('#q').find('textarea[name="q'+i+'"]').val();
+                   if(question1 != "") yz++;
+               }
+               var f = $('#f').find('[id^=delBtn]').length;
+               yz+=f*1;
+               mz = total - yz;
+              $('#total').text(total);$('#yz').text(yz);$('#mz').text(mz);
+              total=0,mz=0,yz=0;
+           });
+         
+     });
+     $(function(){
+          var url1 = "{:U('Student/modifyUpload')}";
+          var qs = "{$qNum['f']}";
+          $('#f').find('[id^=delBtn]').each(function(index, el) {
+                  var thatf = $(this);
+                  var flag = thatf.parent().attr('flag');
+                  var df = $('#df'+flag);
+                  console.log(flag);
+                  df.css('backgroundColor','#589eda');
+                  thatf.click(function(){
+                        var thisf = $(this);
+                        var parentf = thisf.parent();
+                        var  type1 = parentf.prev().val();
+                        var  tId1 = parentf.prev().prev().val();
+                        df.css('backgroundColor','');
+                        $.post(url1,{tId:tId1,type:type1},function(data){
+                                parentf.hide();
+                                parentf.next().show();
+                                parentf.next().next().show();
+                                if(data == 1){
+                                    alert('删除成功!');
+                                }
+                        });
+                  })
+          });
+     })
+</script>
+<script type="text/javascript">
+        $(function(){
+         //简答题提交
+         var qs = "{$qNum['q']}";
+         var urls1 = "{:U('Student/submitQuestion')}";
+         var urls2 = "{:U('Student/modifyQuestion')}";
+         //alert(qs);
+         for(var i=0;i<qs;i++){
+            //console.log($('#q').find('textarea[name="q'+i+'"]'));
+            $('#q').find('textarea[name="q'+i+'"]').each(function(index,arr){
+                //alert(index);
+                var thats = $(this);
+                //console.log(thats);
+                var post_flag = true;
+                var sname = thats.attr('name');
+                var dq = $('#dq'+i);
+               // alert(sname);
+                var sInput = $('#q').find('textarea[name="'+sname+'"]').val();
+                if(sInput === ""){
+                        dq.css('backgroundColor','');
+                        thats.blur(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        if(s1 != ""){dq.css('backgroundColor','#589eda');}
+                        else{dq.css('backgroundColor','');}
+                        if(post_flag){
+                            post_flag = false;
+                            $.post(urls1,{tId:tId1,answer:s1,type:type},
+                                    function(data){
+                                        post_flag = true;
+                                        console.log(data);
+                                 });
+                            }
+                    });
+                }
+                else{
+                    dq.css('backgroundColor','#589eda');
+                    thats.blur(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        if(s1 != ""){dq.css('backgroundColor','#589eda');}
+                        else{dq.css('backgroundColor','');}
+                        if(post_flag){
+                           post_flag = false;
+                           $.post(urls2,{tId:tId1,answer:s1,type:type},function(data){
+                             post_flag = true;
+                             console.log(data);
+                        });
+                      }
+                   });
+                }
+           
+            });
+         }
+    });
+       $(function(){
+         //填空题提交
+         var qs = "{$qNum['b']}";
+         var urls1 = "{:U('Student/submitSingle')}";
+         var urls2 = "{:U('Student/modifySingle')}";
+         //alert(qs);
+         for(var i=0;i<qs;i++){
+            //console.log($('#b').find('textarea[name="b'+i+'"]'));
+            $('#b').find('textarea[name="b'+i+'"]').each(function(index,arr){
+                //alert(index);
+                var thats = $(this);
+                //console.log(thats);
+                var post_flag = true;
+                var sname = thats.attr('name');
+                var sInput = $('#b').find('textarea[name="'+sname+'"]').val();
+                var db = $('#db'+i);
+                if(sInput === ""){
+                        db.css('backgroundColor','');
+                        thats.blur(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        if(s1 != ""){db.css('backgroundColor','#589eda');}
+                        else{db.css('backgroundColor','');}
+                        if(!s1.isLike(sTrue1)){score = 0;}
+                        //alert(score);
+                        if(post_flag){
+                            post_flag = false;
+                            //alert(sInput);
+                            $.post(urls1,{tId:tId1,answer:s1,score:score,type:type},
+                                    function(data){
+                                        post_flag = true;
+                                        console.log(data);
+                                 });
+                            }
+                    });
+                }
+                else{
+                    db.css('backgroundColor','#589eda');
+                    thats.blur(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        //alert(s1);
+                        if(s1 != ""){db.css('backgroundColor','#589eda');}
+                        else{db.css('backgroundColor','');}
+                        if(!s1.isLike(sTrue1)){score = 0;}
+                        if(post_flag){
+                           post_flag = false;
+                           $.post(urls2,{tId:tId1,answer:s1,score:score,type:type},function(data){
+                             post_flag = true;
+                             console.log(data);
+                        });
+                      }
+                   });
+                }
+           
+            });
+         }
+         //为字符串添加模糊比较的方法
+    String.prototype.isLike = function(exp/*类似于SQL中的模糊查询字符串*/, i/*是否区分大小写*/) {
+        var str = this;
+        i = i == null ? false : i;
+        if (exp.constructor == String) {
+            var s = exp.replace(/_/g, function(m, i) {
+                if (i == 0 || i == exp.length - 1) {
+                    return ".";
+                }
+                else {
+                    if (exp.charAt(i - 1) == "[" && exp.charAt(i + 1) == "]") {
+                        return m;
+                    }
+                    return ".";
+                }
+            });
+            s = s.replace(/%/g, function(m, i) {
+                if (i == 0 || i == s.length - 1) {
+                    return ".*";
+                }
+                else {
+                    if (s.charAt(i - 1) == "[" && s.charAt(i + 1) == "]") {
+                        return m;
+                    }
+                    return ".*";
+                }
+            });
+            s = s.replace(/\[_\]/g, "_").replace(/\[%\]/g, "%");
+            var regex = new RegExp("^" + s, i ? "" : "i");
+            return regex.test(this);
+        }
+        return false;
+      };
+    });
+    $(function(){
+         //判断题提交
+         var qs = "{$qNum['j']}";
+         var urls1 = "{:U('Student/submitSingle')}";
+         var urls2 = "{:U('Student/modifySingle')}";
+         //alert(qs);
+         for(var i=0;i<qs;i++){
+            $('#j').find('input[name="j'+i+'"]').each(function(){
+                var thats = $(this);
+                var post_flag = true;
+                var sname = thats.attr('name');
+                var sInput = $('#j').find('input[name="'+sname+'"]:checked').val();
+                var dj =  $('#dj'+i);
+                if(sInput === undefined){
+                       dj.css('backgroundColor','');
+                        thats.click(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        dj.css('backgroundColor','#589eda');
+                        ///alert(sTrue1);
+                        if(s1 != sTrue1){score = 0;}
+                        if(post_flag){
+                            post_flag = false;
+                            //alert(sInput);
+                            $.post(urls1,{tId:tId1,answer:s1,score:score,type:type},
+                                    function(data){
+                                        post_flag = true;
+                                        console.log(data);
+                                 });
+                            }
+                    });
+                }
+                else{
+                    dj.css('backgroundColor','#589eda');
+                    thats.click(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        if(s1 != sTrue1){score = 0;}
+                       if(post_flag){
+                           post_flag = false;
+                           $.post(urls2,{tId:tId1,answer:s1,score:score,type:type},function(data){
+                             post_flag = true;
+                             console.log(data);
+                        });
+                      }
+                   });
+                }
+           
+            });
+         }
+    });
+    $(function(){
+         //多选题提交
+         var qm = "{$qNum['m']}";
+         var urlm1 = "{:U('Student/submitSingle')}";
+         var urlm2 = "{:U('Student/modifySingle')}";
+         for(var i=0;i<qm;i++){
+         $('#m').find('input[name="m'+i+'[]"]').each(function(){
+                var thats = $(this);
+                var post_flag = true;
+                var sname = thats.attr('name');
+               var s = $('#m').find('input[name="'+sname+'"]:checked').map(function() {
+                       return this.value;
+                }).get();
+                var dm = $('#dm'+i); 
+                var sInput = s.join(',');
+                //console.log(sInput);
+                if(sInput === ""){
+                        dm.css('backgroundColor','');
+                        thats.click(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var sm = $('#m').find('input[name="'+sname+'"]:checked').map(function(argument) {
+                       return this.value;
+                        }).get();
+                        var sInput1 = sm.join(',');
+                        if(sInput1 != ""){dm.css('backgroundColor','#589eda');}
+                        else{dm.css('backgroundColor','');}
+                        if(sInput1 != sTrue1){score = 0;}
+                        //alert(score);
+                        if(post_flag){
+                            post_flag = false;
+                            $.post(urlm1,{tId:tId1,answer:sInput1,score:score,type:type},
+                                    function(data){
+                                        post_flag = true;
+                                        console.log(data);
+                                 });
+                            }
+                    });
+                }
+                else{
+                    dm.css('backgroundColor','#589eda');
+                    thats.click(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                       var sm = $('input[name="'+sname+'"]:checked').map(function(argument) {
+                       return this.value;
+                        }).get();
+                        var sInput1 = sm.join(',');
+                        if(sInput1 != ""){dm.css('backgroundColor','#589eda');}
+                        else{dm.css('backgroundColor','');}
+                        if(sInput1 != sTrue1){score = 0;}
+                        if(post_flag){
+                            post_flag = false;
+                            $.post(urlm2,{tId:tId1,answer:sInput1,score:score,type:type},function(data){
+                               post_flag = true;
+                               console.log(data);
+                            });
+                        }
+                   });
+              }
+         });
+        }
+    });
+    $(function(){
+         //单选题提交
+         var qs = "{$qNum['s']}";
+         var urls1 = "{:U('Student/submitSingle')}";
+         var urls2 = "{:U('Student/modifySingle')}";
+         for(var i=0;i<qs;i++){
+            $('#s').find('input[name="s'+i+'"]').each(function(index,arr){
+                //alert(index);
+                var thats = $(this);
+                var post_flag = true;
+                var sname = thats.attr('name');
+                var sInput = $('#s').find('input[name="'+sname+'"]:checked').val();
+                var ds = $('#ds'+i);
+                if(sInput === undefined){
+                       ds.css('backgroundColor','');
+                        thats.click(function(){
+                        ds.css('backgroundColor','#589eda');
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        if(s1 != sTrue1){score = 0;}
+                        if(post_flag){
+                            post_flag = false;
+                            $.post(urls1,{tId:tId1,answer:s1,score:score,type:type},
+                                    function(data){
+                                        post_flag = true;
+                                        console.log(data);
+                                 });
+                            }
+                    });
+                }
+                else{
+                    ds.css('backgroundColor','#589eda');
+                    thats.click(function(){
+                        var panelBody = thats.parents('.panel-body');
+                        var tId1 = panelBody.attr('tId');
+                        var sTrue1 = panelBody.attr('sTrue');
+                        var score = panelBody.attr('score');
+                        var type = panelBody.attr('type');
+                        var s1 = thats.val();
+                        if(s1 != sTrue1){score = 0;}
+                       if(post_flag){
+                           post_flag = false;
+                           $.post(urls2,{tId:tId1,answer:s1,score:score,type:type},function(data){
+                             post_flag = true;
+                             console.log(data);
+                        });
+                      }
+                   });
+                }
+            });
+         }
+    })
+</script>
+<script type="text/javascript">
+     $(function(){
+          var qCount = {$qCount};
+          //alert(qCount);
+          var q = [];
+           q[0] = "{$qAarry['single']}";
+           q[1] = "{$qAarry['multi']}";
+           q[3] = "{$qAarry['blank']}";
+           q[2] = "{$qAarry['judge']}";
+           q[4] = "{$qAarry['question']}";
+           q[5] = "{$qAarry['file']}";
+           //console.log("" == q[5]);
+          var item = $('#item').find('li');
+          var itemA = $('#item').find('a');
+         // 几大题型 显示
+          for(var i=qCount;i<6;i++){
+              item[i].style.display = 'none';
+          }
+          //初始化
+         for(var i=0;i<6;i++){
+               if(q[i] != ""){
+                    $('#'+q[i]).addClass('in active');
+                    break;
+               }
+           }
+          var cc1 = 0; //j计数
+          for(var i=0;i<6;i++){
+              if(q[i] != "" && cc1 < qCount){
+                 itemA[cc1].href = "#"+q[i];
+                 itemA[cc1].setAttribute('aria-controls',q[i]);
+                 cc1++;
+              }
+          }
+         for(var i=0;i<6;i++){ //初始化
+               if(q[i] != ""){
+                 var aName = q[i];
+                  $("[aria-label=q-"+aName+"]").show();
+                  $('[aria-label^=q]').not("[aria-label=q-"+aName+"]").each(function(){
+                       $(this).hide();
+                  });
+                  break;
+               }
+           }
+         for(var i=0;i<6;i++){
+             if(q[i] != ""){
+                  var aName = "#"+q[i];
+                  $('#item').find("a[href='"+aName+"']").click(function() {
+                      /* Act on the event */
+                      $that1 = $(this);
+                  $("[aria-label=q-"+$that1.attr('aria-controls')+"]").show();
+                  $('[aria-label^=q]').not("[aria-label=q-"+$that1.attr('aria-controls')+"]").each(function(){
+                           $(this).hide();
+                      });
+                });
+            }
+        }
+     })
+</script>
+<script type="text/javascript">
+      var long1 = {};
+       long1.n = 0;
+       long1.t = {$rtime}*60;
+       long1.mytimeount = null;
+      function showTime(){
+             var lefttime=parseInt(long1.t)-long1.n;
+            if(lefttime > 0){
+                  var h = parseInt(lefttime/(60*60));
+                  var m = parseInt(lefttime/60%60);
+                  var s = parseInt(lefttime%60);
+                   h=checkTime(h);
+                   m=checkTime(m);
+                   s=checkTime(s);
+                  document.getElementById('timercontrol').innerHTML =h+":"+m+":"+s;
+                  long1.mytimeount = setTimeout(showTime,1000);
+                  long1.n=long1.n+1;
+             }
+             else{
+                 setInterval(long1.mytimeount);
+                 alert("此次考试已结束！");
+                 delayURL('index',0);
+             }
+          }
+          function checkTime(i){
+            if(i<10){
+               i="0"+i;
+            }
+            return i;
+          }
+           function delayURL(url,time){
+             setTimeout("location.href = '" + url + "'",time);
+          }
+          showTime();
+</script>
+</html>

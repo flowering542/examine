@@ -1,0 +1,86 @@
+
+#leftdiv{
+	position: fixed;
+}
+#timercontrol{
+	margin:10px 0;
+}
+
+button{
+	margin:5px;
+}
+.label{
+	padding:15px auto 15px;
+    padding-top:15px;
+	display:block;
+	width:70%;
+	height:60px;
+	font-size:3rem;
+	text-align:center;
+}
+
+.number{
+    float: left;
+    width: 8em;
+    font-family:Sans-serif;
+    font-weight: normal;
+    font-size: 1.8rem;
+    border-bottom: 1px solid #3D67AF;
+    padding: 0 0 0.1em 0.5em;
+}
+h2 {
+    display: block;
+    font-size: 1.5em;
+    -webkit-margin-before: 0.83em;
+    -webkit-margin-after: 0.83em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+#c textarea{
+	height:40px;
+	width:100%;
+}
+
+#e textarea{
+	height:200px;
+	width:100%;
+}
+.btn a{
+	color:white;
+}
+#download{
+	margin-left:50px;
+	margin-bottom:15px;
+}
+#exampleInputFile{
+	margin:15px 0 15px 50px;
+
+}
+#submit{
+	float:right;
+	font-size:0.5em;
+}
+
+
+
+/* 按钮组 */
+
+#button2{
+	display:none;
+}
+#button3{
+	display:none;
+}
+#button4{
+	display:none;
+}
+#button5{
+	display:none;
+}
+#button6{
+	display:none;
+}
+
+
+

@@ -1,0 +1,19 @@
+.main-content{
+	margin-top: 40px;
+	padding-left:130px;
+}
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.st-content{
+	margin: 0 40px;
+	border: 1px solid darkorange;
+}
+.st-content h2{
+	color: lightseagreen;
+}
+.table-responsive {
+    font-size: 14px;
+}
+

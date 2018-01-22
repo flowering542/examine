@@ -1,0 +1,232 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+.page-header{
+	margin-top: 10px;
+}
+.dashboard-stat {
+	display: block;
+	margin-bottom: 25px;
+	overflow: hidden;
+	border-radius: 4px;
+	height: 130px;
+}
+.turquoise {
+	background-color: #1ABC9C;
+}
+
+.green_sea {
+	background-color: #16A085;
+}
+
+.emerland {
+	background-color: #2ECC71;
+}
+
+.nephritis {
+	background-color: #27AE60;
+}
+
+.peter_river {
+	background-color: #3498DB;
+}
+
+.belize_hole {
+	background-color: #2980B9;
+}
+.amethyst{
+	background-color: #9B59B6;
+}
+.wisteria{
+	background-color: #8E44AD;
+}
+.dashboard-stat .visual{
+	width: 80px;
+	height: 80px;
+	display: block;
+	float: left;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	font-size: 35px;
+	line-height: 35px;
+}
+.dashboard-stat .visual i{
+	color: white;
+	opacity: 0.2;
+	margin-left: -35px;
+	font-size: 110px;
+	line-height: 110px;
+}
+.dashboard-stat .details{
+	position: absolute;
+	right: 15px;
+	padding-right: 15px;
+}
+.dashboard-stat .details .number{
+	color: white;
+	padding-top: 25px;
+	text-align: right;
+	font-size: 34px;
+	line-height: 36px;
+	letter-spacing: -1px;
+	margin-bottom: 0px;
+	font-weight: 300;
+}
+.dashboard-stat .details .desc{
+	color: white;
+	opacity: 1;
+	text-align: right;
+	font-size: 16px;
+	letter-spacing: 0px;
+	font-weight: 300;
+}
+.more{
+	position: relative;
+	color: white;
+	clear: both;
+	display: block;
+	padding: 6px 10px 6px 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-size: 11px;
+	opacity: 0.7;
+	bottom: -24px;
+}
+.dashboard-stat .more > i{
+	float: right;
+	display:inline-block;
+	margin-top: 1px;
+}
+.dashboard-stat .more{
+	color: white;
+	text-decoration: none;
+}
+.dashboard-stat .more:hover,
+.dashboard-stat .more:active
+{
+	color: white;
+	text-decoration: none;
+}
+.page-header{
+	margin-top: 10px;
+}
+.dashboard-stat {
+	display: block;
+	margin-bottom: 25px;
+	overflow: hidden;
+	border-radius: 4px;
+	height: 130px;
+}
+.turquoise {
+	background-color: #1ABC9C;
+}
+
+.green_sea {
+	background-color: #16A085;
+}
+
+.emerland {
+	background-color: #2ECC71;
+}
+
+.nephritis {
+	background-color: #27AE60;
+}
+
+.peter_river {
+	background-color: #3498DB;
+}
+
+.belize_hole {
+	background-color: #2980B9;
+}
+.amethyst{
+	background-color: #9B59B6;
+}
+.wisteria{
+	background-color: #8E44AD;
+}
+.dashboard-stat .visual{
+	width: 80px;
+	height: 80px;
+	display: block;
+	float: left;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-bottom: 15px;
+	font-size: 35px;
+	line-height: 35px;
+}
+.dashboard-stat .visual i{
+	color: white;
+	opacity: 0.2;
+	margin-left: -35px;
+	font-size: 110px;
+	line-height: 110px;
+}
+.dashboard-stat .details{
+	position: absolute;
+	right: 15px;
+	padding-right: 15px;
+}
+.dashboard-stat .details .number{
+	color: white;
+	padding-top: 25px;
+	text-align: right;
+	font-size: 34px;
+	line-height: 36px;
+	letter-spacing: -1px;
+	margin-bottom: 0px;
+	font-weight: 300;
+}
+.dashboard-stat .details .desc{
+	color: white;
+	opacity: 1;
+	text-align: right;
+	font-size: 16px;
+	letter-spacing: 0px;
+	font-weight: 300;
+}
+.more{
+	position: relative;
+	color: white;
+	clear: both;
+	display: block;
+	padding: 6px 10px 6px 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	font-size: 11px;
+	opacity: 0.7;
+	bottom: -24px;
+}
+.dashboard-stat .more > i{
+	float: right;
+	display:inline-block;
+	margin-top: 1px;
+}
+.dashboard-stat .more{
+	color: white;
+	text-decoration: none;
+}
+.dashboard-stat .more:hover,
+.dashboard-stat .more:active
+{
+	color: white;
+	text-decoration: none;
+}
+

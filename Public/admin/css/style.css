@@ -1,0 +1,120 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html {
+    font-size: 50px;
+    height: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+}
+body {
+    font-family: "Microsoft YaHei";
+    font-size: .28em;
+    line-height: 1;
+    color: #333;
+    background-color: white;
+}
+.admin_login {
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+    margin: 10% auto 0 auto;
+    padding: 40px;
+    box-shadow: 0 -15px 30px #0d957a;
+    border-radius: 5px;
+}
+.admin-head {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #45bda6;
+    text-shadow: 0 0 1px #0e947a;
+    margin-bottom: 15px;
+}
+.admin-head h3 {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #45bda6;
+    text-shadow: 0 0 1px #0e947a;
+}
+.admin-head h6 {
+    display: block;
+    font-size: 12px;
+    margin-top: 8px;
+}
+.admin-head,.user_icon,.pwd_icon,.val_icon,.admin-last,.admin-copy {
+    margin: 10px 0;
+    height: 42px;
+    overflow: hidden;
+    position: relative;
+}
+.admin_login .login_txtbx {
+    font-size: 14px;
+    height: 26px;
+    line-height: 26px;
+    padding: 8px 5%;
+    width: 90%;
+    text-indent: 2em;
+    border: none;
+    background: #5cbdaa;
+    color: white;
+}
+.admin_login .checkcode {
+    height: 42px;
+}
+.admin_login .checkcode input {
+    width: 300px;
+    height: 36px;
+    line-height: 36px;
+    padding: 3px;
+    color: white;
+    outline: none;
+    border: none;
+    text-indent: 2.8em;
+}
+
+.admin-last .submit_btn {
+    width: 100%;
+    height: 42px;
+    border: none;
+    font-size: 16px;
+    background: #048f74;
+    color: #f8f8f8;
+    cursor: pointer;
+}
+.admin-last{
+    clear: both;	
+}
+.ver_btn {
+    text-align: center;
+    border: none;
+    color: #f4f4f4;
+    height: 42px;
+    width: 145px;
+    line-height: 42px;
+    margin-bottom: 10px; 
+    z-index: 1;
+    position: relative;
+    float: right;
+    background: #48bca5;
+    cursor: pointer;
+}
+
+.admin-copy p {
+    color: #53c6b0;
+    font-size: 12px;
+    text-align: center;
+    margin: 5px 0;
+}
+#v_container{
+	width: 145px;
+	height: 42px;
+	float: left;
+	margin-bottom: 10px; 
+}
+
+
+
+

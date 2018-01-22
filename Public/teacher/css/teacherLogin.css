@@ -1,0 +1,31 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	width: 100%;
+	height: 100%;
+}
+body{
+	font-family: arial;
+	background-color: #1ABC9C;
+	background-size:cover;
+	background-repeat: no-repeat;
+}
+h3{
+	text-align: center;
+	margin-bottom: 30px;
+	color: #337ab7;
+}
+.myInputGroup{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.col-lg-4{
+	background-color: whitesmoke;
+	height: 300px;
+	margin-top: 150px;
+}
+button{
+	margin-top: 20px;
+}
